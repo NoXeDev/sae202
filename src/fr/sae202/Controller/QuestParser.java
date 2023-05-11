@@ -24,6 +24,10 @@ public class QuestParser {
     private String scenariosPath;
     private ArrayList<Integer> availableScenarioList;
 
+    /**
+     * Constructor of the QuestParser class
+     * @param path Path to the scenario folder
+     */
     public QuestParser(String path) {
         scenariosPath = path;
         ArrayList<Integer> tmp = new ArrayList<>();
@@ -37,10 +41,17 @@ public class QuestParser {
         availableScenarioList = tmp;
     }
 
+    /**
+     * Parse the scenario in the given path
+     * @param scenarioNumber Scenario number
+     * @return Scenario object containing all quests
+     * @throws ScenarioNotFoundException If a scenario is not found
+     * @throws QuestParseException If a quest is not well formatted
+     */
     public Scenario parseScenario(int scenarioNumber) throws ScenarioNotFoundException, QuestParseException {
         if(availableScenarioList.contains(scenarioNumber))
         {
-            File scenarioFile = new File("res/scenario_"+scenarioNumber+".txt");
+            File scenarioFile = new File(scenariosPath + "/scenario_"+scenarioNumber+".txt");
             Map<Integer, Quest> parsedScenarioMap = new HashMap<Integer, Quest>();
             try {
                 try (BufferedReader fReader = new BufferedReader(new InputStreamReader(new FileInputStream(scenarioFile), "UTF-8"))) {
@@ -78,7 +89,7 @@ public class QuestParser {
                     }
 
                     fReader.close(); // REALLY IMPORTANT !!! (ressources need to be closed)
-                } catch (NumberFormatException e) {
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                     throw new QuestParseException("Number conversion was failed", scenarioNumber, -1);
                 }
             } 
@@ -94,6 +105,12 @@ public class QuestParser {
         }
     }
 
+    /**
+     * Parse all scenario in the given path
+     * @return Map<Integer, Scenario> scenarioMap
+     * @throws ScenarioNotFoundException If a scenario is not found
+     * @throws QuestParseException If a quest is not well formatted
+     */
     public Map<Integer, Scenario> parseAllScenario() throws ScenarioNotFoundException, QuestParseException
     {
         Map<Integer, Scenario> scenarioList = new HashMap<>();
