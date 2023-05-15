@@ -6,6 +6,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class GlobalUtils {
+
+    /**
+     * Return all matches of a regex in a string
+     * @param str the string
+     * @param regex the regex
+     * @return all matches of a regex in a string
+     */
     public static List<String> arrayMatches(String str, String regex)
     {
         List<String> allMatches = new ArrayList<String>();

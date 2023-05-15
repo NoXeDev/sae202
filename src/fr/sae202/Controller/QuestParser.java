@@ -89,7 +89,7 @@ public class QuestParser {
                     }
 
                     fReader.close(); // REALLY IMPORTANT !!! (ressources need to be closed)
-                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                } catch (NumberFormatException | IndexOutOfBoundsException e) {
                     throw new QuestParseException("Number conversion was failed", scenarioNumber, -1);
                 }
             } 
