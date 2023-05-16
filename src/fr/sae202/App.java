@@ -2,7 +2,7 @@ package fr.sae202;
 
 import java.util.Map;
 
-import fr.sae202.Controller.QuestParser;
+import fr.sae202.Core.QuestParser;
 import fr.sae202.Exceptions.QuestParseException;
 import fr.sae202.Exceptions.ScenarioNotFoundException;
 import fr.sae202.Models.Scenario;

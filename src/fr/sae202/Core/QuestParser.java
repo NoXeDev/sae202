@@ -1,4 +1,4 @@
-package fr.sae202.Controller;
+package fr.sae202.Core;
 
 import java.io.BufferedReader;
 import java.io.File;

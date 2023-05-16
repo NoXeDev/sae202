@@ -1,8 +1,7 @@
-package fr.sae202;
+package fr.sae202.Core;
 
 import org.junit.jupiter.api.Test;
 
-import fr.sae202.Controller.QuestParser;
 import fr.sae202.Exceptions.QuestParseException;
 import fr.sae202.Exceptions.ScenarioNotFoundException;
 import fr.sae202.Models.Quest;
