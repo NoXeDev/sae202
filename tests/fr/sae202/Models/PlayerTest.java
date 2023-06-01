@@ -4,7 +4,6 @@ import fr.sae202.Utils.Vector2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -44,7 +43,7 @@ public class PlayerTest {
     @DisplayName("Player quest distance")
     public void questDistanceTest()
     {
-        /*ArrayList<Quest> questList = new ArrayList<Quest>();
+        ArrayList<Quest> questList = new ArrayList<Quest>();
         questList.addAll(Arrays.asList(
                new Quest(1, new Vector2<Integer>(1, 2), new Vector2<Vector2<Integer>>(new Vector2<Integer>(1, 2), new Vector2<Integer>(3, 4)), 3, 100, "test quest 1"),
                 new Quest(2, new Vector2<Integer>(-1, 4), new Vector2<Vector2<Integer>>(new Vector2<Integer>(-1, 4), new Vector2<Integer>(-3, 2)), 6, 200, "test quest 2"),
@@ -55,9 +54,9 @@ public class PlayerTest {
         Player testPlayer = new Player();
         testPlayer.movePlayer(new Vector2<>(1, 3));
 
-        for(Quest current: questList)
-        {
-            assertEquals(testPlayer.questDistance(current), Math.abs(testPlayer.getPlayerPos().getX() - current.getQuestPos().getX()) + Math.abs(testPlayer.getPlayerPos().getY() - current.getQuestPos().getY()));
-        }*/
+        assertEquals(testPlayer.questDistance(questList.get(0)), 1);
+        assertEquals(testPlayer.questDistance(questList.get(1)), 3);
+        assertEquals(testPlayer.questDistance(questList.get(2)), 10);
+        assertEquals(testPlayer.questDistance(questList.get(3)), 11);
     }
 }
