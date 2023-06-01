@@ -91,4 +91,16 @@ public class Player {
     public ArrayList<Quest> getFinishedQuests(){
         return pFinishedQuests;
     }
+
+    /**
+     * get the current player position
+     * @return the current player position
+     */
+    public Vector2<Integer> getPlayerPos() {
+        return pPos;
+    }
+
+    public int getPlayerTime() {
+        return pTime;
+    }
 }

@@ -57,4 +57,8 @@ public class Quest {
         && other.qXp == this.qXp 
         && other.qTitle.equals(this.qTitle);
     }
+
+    public Vector2<Integer> getQuestPos() {
+        return qPos;
+    }
 }
