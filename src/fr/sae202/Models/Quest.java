@@ -39,7 +39,7 @@ public class Quest {
 
     /**
      * Compare two quest
-     * @param other the other quest
+     * @param obj the other quest
      * @return true if the two quest are equals
      */
     @Override
@@ -56,5 +56,9 @@ public class Quest {
         && other.qDuration == this.qDuration 
         && other.qXp == this.qXp 
         && other.qTitle.equals(this.qTitle);
+    }
+
+    public Vector2<Integer> getQuestPos() {
+        return qPos;
     }
 }
