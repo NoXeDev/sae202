@@ -39,7 +39,7 @@ public class Quest {
 
     /**
      * Compare two quest
-     * @param other the other quest
+     * @param obj the other quest
      * @return true if the two quest are equals
      */
     @Override

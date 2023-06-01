@@ -11,62 +11,45 @@ public class Player {
     private Vector2<Integer> pPos;
     private int pTime;
 
+    /**
+     * Create a new player
+     */
     public Player(){
-        /**
-         * Create a new player
-         * @param parScenario the scenario the player is playing
-         */
-        pFinishedQuests = new ArrayList<Quest>();
+        pFinishedQuests = new ArrayList<>();
         pXp = 0;
-        pPos = new Vector2<Integer>(0, 0);
+        pPos = new Vector2<>(0, 0);
         pTime = 0;
     }
 
-    public void movePlayer(Vector2<Integer> parNewPos){
-        /**
-         * Move the player to a new position and increments the time with each change of position
-         * @param parNewPos the new position
-         */
-        System.out.println("Se déplacer en "+parNewPos.toString());
+    /**
+     * Move the player to a new position and increments the time with each change of position
+     * @param newPosition the new position
+     */
+    public void movePlayer(Vector2<Integer> newPosition){
+        System.out.println("Se déplacer en "+newPosition.toString());
 
-        while (pPos.getX() != parNewPos.getX()){
-            if (pPos.getX() < parNewPos.getX()){
-                pPos.setX(pPos.getX() + 1);
-            }
-            else{
-                pPos.setX(pPos.getX() - 1);
-            }
-            pTime++;
-        }
-        while (pPos.getY() != parNewPos.getY()){
-            if (pPos.getY() < parNewPos.getY()){
-                pPos.setY(pPos.getY() + 1);
-            }
-            else{
-                pPos.setY(pPos.getY() - 1);
-            }
-            pTime++;
-        }
+        this.pPos = newPosition;
+        pTime += newPosition.getX() + newPosition.getY();
     }
 
-    public int questDistance(Quest parQuest){
-        /**
-         * Calculate the distance between the player and a quest
-         * @param parQuest the quest to calculate the distance
-         * @return the distance between the player and the quest
-         */
-        return Math.abs(pPos.getX() - parQuest.qPos.getX()) + Math.abs(pPos.getY() - parQuest.qPos.getY());
+    /**
+     * Calculate the distance between the player and a quest
+     * @param nQuest the quest to calculate the distance
+     * @return the distance between the player and the quest
+     */
+    public int questDistance(Quest nQuest){
+        return Math.abs(pPos.getX() - nQuest.qPos.getX()) + Math.abs(pPos.getY() - nQuest.qPos.getY());
     }
 
-    public Map<Quest,Integer> allScenarioDistance(Scenario parScenario){
-        /**
-         * Calculate the distance between the player and all the quest of a scenario when the player has not finished the quest
-         * @param parScenario the scenario to calculate the distance
-         * @return a map with the quest as key and the distance as value
-         */
+    /**
+     * Calculate the distance between the player and all the quest of a scenario when the player has not finished the quest
+     * @param scenario the scenario to calculate the distance
+     * @return a map with the quest as key and the distance as value
+     */
+    public Map<Quest,Integer> allScenarioDistance(Scenario scenario){
         Map<Quest,Integer> locMap = new HashMap<Quest,Integer>();
-        for (Integer idQuest : parScenario.questMap.keySet()){
-            Quest currentQuest = parScenario.questMap.get(idQuest);
+        for (Integer idQuest : scenario.questMap.keySet()){
+            Quest currentQuest = scenario.questMap.get(idQuest);
             if (!pFinishedQuests.contains(currentQuest)) {
                 locMap.put(currentQuest, questDistance(currentQuest));
             }
@@ -74,38 +57,38 @@ public class Player {
         return locMap;
     }
 
-    public void addXp(int parXp){
-        /**
-         * Add xp to the player
-         * @param parXp the xp to add
-         */
-        pXp += parXp;
+    /**
+     * Add xp to the player
+     * @param xp the xp to add
+     */
+    public void addXp(int xp){
+        pXp += xp;
     }
 
-    public void addTime(int parTime){
-        /**
-         * Add time to the player
-         * @param parTime the time to add
-         */
-        pTime += parTime;
+    /**
+     * Add time to the player
+     * @param time the time to add
+     */
+    public void addTime(int time){
+        pTime += time;
     }
 
-    public void addFinishedQuest(Quest parQuest){
-        /**
-         * Add a quest to the finished quest list and add xp and time corresponding to the quest
-         * @param parQuest the quest to add
-         */
-        pFinishedQuests.add(parQuest);
-        addXp(parQuest.qXp);
-        addTime(parQuest.qDuration);
+    /**
+     * Add a quest to the finished quest list and add xp and time corresponding to the quest
+     * @param quest the quest to add
+     */
+    public void addFinishedQuest(Quest quest){
+        pFinishedQuests.add(quest);
+        addXp(quest.qXp);
+        addTime(quest.qDuration);
 
-        System.out.println(parQuest.qTitle+" terminée");
+        System.out.println(quest.qTitle+" terminée");
     }
 
+    /**
+     * @return the finished quest list
+     */
     public ArrayList<Quest> getFinishedQuests(){
-        /**
-         * @return the finished quest list
-         */
         return pFinishedQuests;
     }
 }
