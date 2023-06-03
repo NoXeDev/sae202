@@ -84,7 +84,7 @@ public class QuestParser {
                             splittedStr[5]
                         );
 
-                        parsedScenarioMap.put(currentQuest.qId, currentQuest);
+                        parsedScenarioMap.put(currentQuest.getQuestId(), currentQuest);
                         line = fReader.readLine();
                     }
 
@@ -117,7 +117,7 @@ public class QuestParser {
         for(int i: availableScenarioList)
         {
             Scenario current = this.parseScenario(i);
-            scenarioList.put(current.id, current);
+            scenarioList.put(current.getScenarioId(), current);
         }
 
         return scenarioList;

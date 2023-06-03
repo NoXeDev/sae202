@@ -3,18 +3,18 @@ package fr.sae202.Models;
 import java.util.Map;
 
 public class Scenario {
-    public int id;
-    public Map<Integer, Quest> questMap;
+    private int sId;
+    private Map<Integer, Quest> questMap;
 
     public Scenario(int id, Map<Integer, Quest> quests)
     {
-        this.id = id;
+        this.sId = id;
         this.questMap = quests;
     }
 
     public String toString()
     {
-        String tmp = this.id+" ===================================== \n";
+        String tmp = this.sId+" ===================================== \n";
 
         for(Quest current : questMap.values())
         {
@@ -24,5 +24,15 @@ public class Scenario {
         tmp+="===================================== \n";
 
         return tmp;
+    }
+
+    public int getScenarioId()
+    {
+        return this.sId;
+    }
+
+    public Map<Integer, Quest> getQuestMap()
+    {
+        return this.questMap;
     }
 }

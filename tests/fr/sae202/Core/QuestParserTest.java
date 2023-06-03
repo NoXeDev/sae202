@@ -35,11 +35,11 @@ public class QuestParserTest {
        Quest questHasNotNull = new Quest(3, new Vector2<Integer>(5, 6), new Vector2<Vector2<Integer>>(new Vector2<Integer>(5, 1), new Vector2<Integer>(4, 2)), 8, 300, "vaincre Nymphe de libellule géante");
 
        try {
-            assertEquals(parser.parseScenario(0).questMap.get(1), preCondNull);
-            assertEquals(parser.parseScenario(0).questMap.get(2), preCondSecondValNull);
-            assertEquals(parser.parseScenario(3).questMap.get(4), preCondFirstVecHasNullVal);
-            assertEquals(parser.parseScenario(4).questMap.get(0), preCondSecondVecHasNullVal);
-            assertEquals(parser.parseScenario(5).questMap.get(3), questHasNotNull);
+            assertEquals(parser.parseScenario(0).getQuestMap().get(1), preCondNull);
+            assertEquals(parser.parseScenario(0).getQuestMap().get(2), preCondSecondValNull);
+            assertEquals(parser.parseScenario(3).getQuestMap().get(4), preCondFirstVecHasNullVal);
+            assertEquals(parser.parseScenario(4).getQuestMap().get(0), preCondSecondVecHasNullVal);
+            assertEquals(parser.parseScenario(5).getQuestMap().get(3), questHasNotNull);
         } catch (ScenarioNotFoundException | QuestParseException e) {
             fail("Parser throw an error", e);
         }
