@@ -34,7 +34,7 @@ public class Game {
     * @throws ScenarioNotFoundException
     * @throws QuestParseException
    */
-   public Solves solutionEfficaceGloutonne(Scenario scenario) throws ScenarioNotFoundException, QuestParseException
+   public Solves solutionEfficaceGloutonne(Scenario scenario)
    {
         Quest currentQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario, player), player);
     
@@ -47,6 +47,47 @@ public class Game {
 
         player.movePlayer(currentQuest.getQuestPos());
         player.addFinishedQuest(currentQuest);
+
+        Solves gameSolve = new Solves(
+            (ArrayList<Integer>)player.getFinishedQuests().stream().map(Quest::getQuestId).collect(Collectors.toList()),
+            player.getPlayerTime(),
+            player.getPlayerXp(),
+            player.getFinishedQuests().size(),
+            player.sumDistancesTraveled()
+        );
+
+        this.player.resetPlayer();
+
+        return gameSolve;
+    }
+
+
+    /**
+     * Greedy Exhaustive solution for the level 1 of sae202
+     * @param scenario The scenario id
+     * @return The solves object obtain by the greedy exhaustive solution
+     */
+    public Solves solutionExhaustiveGloutonne(Scenario scenario)
+    {
+        ArrayList<Quest> availableQuests = Algorithms.fetchAvailableQuests(scenario, player);
+
+        boolean gameLoop = true;
+        while(gameLoop)
+        {
+            for(Quest quest : availableQuests)
+            {
+                if(quest.getQuestId() == 0 && availableQuests.size() == 1 && player.getFinishedQuests().size() == (scenario.getQuestMap().size() - 1))
+                {
+                    gameLoop = false;
+                } else if(quest.getQuestId() == 0)
+                {
+                    continue;
+                }
+                player.movePlayer(quest.getQuestPos());
+                player.addFinishedQuest(quest);
+            }
+            availableQuests = Algorithms.fetchAvailableQuests(scenario, player);
+        }
 
         Solves gameSolve = new Solves(
             (ArrayList<Integer>)player.getFinishedQuests().stream().map(Quest::getQuestId).collect(Collectors.toList()),

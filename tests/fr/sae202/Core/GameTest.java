@@ -1,7 +1,6 @@
 package fr.sae202.Core;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,8 +9,6 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import fr.sae202.Exceptions.QuestParseException;
-import fr.sae202.Exceptions.ScenarioNotFoundException;
 import fr.sae202.Models.Quest;
 import fr.sae202.Models.Scenario;
 import fr.sae202.Models.Solves;
@@ -39,16 +36,12 @@ public class GameTest {
     public void solutionEfficaceGloutonneTest() 
     {
         Game game = new Game();
-        try {
-            Solves testSolves = game.solutionEfficaceGloutonne(scenario_0);
-            
-            assertTrue(testSolves.getSolveDuration() >= 27 || testSolves.getSolveDuration() <= 30); // Values provided by Mr Auger
-            assertTrue(testSolves.getSolveXp() >= 350 || testSolves.getSolveXp() <= 450); // Values provided by Mr Auger
-            assertTrue(testSolves.getSolveQuestNumber() == 4); // Values provided by Mr Auger
-            assertTrue(testSolves.getSumDistancesTraveled() >= 14 || testSolves.getSumDistancesTraveled() <= 20); // Values provided by Mr Auger
+        Solves testSolves = game.solutionEfficaceGloutonne(scenario_0);
+        
+        assertTrue(testSolves.getSolveDuration() >= 27 || testSolves.getSolveDuration() <= 30); // Values provided by Mr Auger
+        assertTrue(testSolves.getSolveXp() >= 350 || testSolves.getSolveXp() <= 450); // Values provided by Mr Auger
+        assertTrue(testSolves.getSolveQuestNumber() == 4); // Values provided by Mr Auger
+        assertTrue(testSolves.getSumDistancesTraveled() >= 14 || testSolves.getSumDistancesTraveled() <= 20); // Values provided by Mr Auger
 
-        } catch (ScenarioNotFoundException | QuestParseException e) {
-            fail("Game throw an error", e);
-        }
     }
 }
