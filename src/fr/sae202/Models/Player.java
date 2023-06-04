@@ -10,6 +10,7 @@ public class Player {
     private int pXp;
     private Vector2<Integer> pPos;
     private int pTime;
+    private boolean printDebug = true;
 
     /**
      * Create a new player
@@ -26,10 +27,11 @@ public class Player {
      * @param newPosition the new position
      */
     public void movePlayer(Vector2<Integer> newPosition){
-        System.out.println("Se déplacer en "+newPosition.toString());
-
+        if (printDebug)
+            System.out.println("Se déplacer en "+newPosition.toString());
+            
+        pTime += Math.abs(this.pPos.getX() - newPosition.getX()) + Math.abs(this.pPos.getY() - newPosition.getY());
         this.pPos = newPosition;
-        pTime += newPosition.getX() + newPosition.getY();
     }
 
     /**
@@ -38,7 +40,7 @@ public class Player {
      * @return the distance between the player and the quest
      */
     public int questDistance(Quest nQuest){
-        return Math.abs(pPos.getX() - nQuest.qPos.getX()) + Math.abs(pPos.getY() - nQuest.qPos.getY());
+        return Math.abs(pPos.getX() - nQuest.getQuestPos().getX()) + Math.abs(pPos.getY() - nQuest.getQuestPos().getY());
     }
 
     /**
@@ -48,8 +50,8 @@ public class Player {
      */
     public Map<Quest,Integer> allScenarioDistance(Scenario scenario){
         Map<Quest,Integer> locMap = new HashMap<Quest,Integer>();
-        for (Integer idQuest : scenario.questMap.keySet()){
-            Quest currentQuest = scenario.questMap.get(idQuest);
+        for (Integer idQuest : scenario.getQuestMap().keySet()){
+            Quest currentQuest = scenario.getQuestMap().get(idQuest);
             if (!pFinishedQuests.contains(currentQuest)) {
                 locMap.put(currentQuest, questDistance(currentQuest));
             }
@@ -79,10 +81,14 @@ public class Player {
      */
     public void addFinishedQuest(Quest quest){
         pFinishedQuests.add(quest);
-        addXp(quest.qXp);
-        addTime(quest.qDuration);
+        if(quest.getQuestId() != 0)
+        {
+            addXp(quest.getQuestXp());
+        }
+        addTime(quest.getQuestDuration());
 
-        System.out.println(quest.qTitle+" terminée");
+        if(printDebug)
+            System.out.println(quest.getQuestTitle()+" terminée");
     }
 
     /**
@@ -102,5 +108,48 @@ public class Player {
 
     public int getPlayerTime() {
         return pTime;
+    }
+
+    public int getPlayerXp() {
+        return pXp;
+    }
+
+    /**
+     * Reset the player vars
+     */
+    public void resetPlayer()
+    {
+        pFinishedQuests.clear();
+        pXp = 0;
+        pPos = new Vector2<>(0, 0);
+        pTime = 0;
+    }
+
+    /**
+     * Disable the print of all the players movements and other actions
+     */
+    public void debugOff()
+    {
+        printDebug = false;
+    }
+
+    /**
+     * Enable the print of all the players movements and other actions
+     */
+    public void debugOn()
+    {
+        printDebug = true;
+    }
+
+
+    public int sumDistancesTraveled()
+    {
+        int sum = this.pTime;
+        for(Quest quest : this.pFinishedQuests)
+        {
+            sum -= quest.getQuestDuration();
+        }
+
+        return sum;
     }
 }

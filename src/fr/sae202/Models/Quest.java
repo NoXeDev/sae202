@@ -3,12 +3,12 @@ package fr.sae202.Models;
 import fr.sae202.Utils.Vector2;
 
 public class Quest {
-    public int qId;
-    public Vector2<Integer> qPos;
-    public Vector2<Vector2<Integer>> qPrecondition;
-    public int qDuration;
-    public int qXp;
-    public String qTitle;
+    private int qId;
+    private Vector2<Integer> qPos;
+    private Vector2<Vector2<Integer>> qPrecondition;
+    private int qDuration;
+    private int qXp;
+    private String qTitle;
 
     /**
      * Data structure for store quest datas
@@ -58,7 +58,28 @@ public class Quest {
         && other.qTitle.equals(this.qTitle);
     }
 
+
+    public int getQuestId() {
+        return qId;
+    }
+    
     public Vector2<Integer> getQuestPos() {
         return qPos;
+    }
+
+    public Vector2<Vector2<Integer>> getQuestPrecondition() {
+        return qPrecondition;
+    }
+
+    public int getQuestDuration() {
+        return qDuration;
+    }
+
+    public int getQuestXp() {
+        return qXp;
+    }
+
+    public String getQuestTitle() {
+        return qTitle;
     }
 }
