@@ -45,6 +45,7 @@ public class GameTest {
             assertTrue(testSolves.getSolveDuration() >= 27 || testSolves.getSolveDuration() <= 30); // Values provided by Mr Auger
             assertTrue(testSolves.getSolveXp() >= 350 || testSolves.getSolveXp() <= 450); // Values provided by Mr Auger
             assertTrue(testSolves.getSolveQuestNumber() == 4); // Values provided by Mr Auger
+            assertTrue(testSolves.getSumDistancesTraveled() >= 14 || testSolves.getSumDistancesTraveled() <= 20); // Values provided by Mr Auger
 
         } catch (ScenarioNotFoundException | QuestParseException e) {
             fail("Game throw an error", e);

@@ -7,13 +7,15 @@ public class Solves {
     private int solveDuration;
     private int solveXp;
     private int solveQuestNumber;
+    private int sumDistancesTraveled;
 
-    public Solves(ArrayList<Integer> solveList, int solveDuration, int solveXp, int solveQuestNumber) 
+    public Solves(ArrayList<Integer> solveList, int solveDuration, int solveXp, int solveQuestNumber, int sumDistancesTraveled) 
     {
         this.solveList = solveList;
         this.solveDuration = solveDuration;
         this.solveXp = solveXp;
         this.solveQuestNumber = solveQuestNumber;
+        this.sumDistancesTraveled = sumDistancesTraveled;
     }
 
     public ArrayList<Integer> getSolveList() {
@@ -30,5 +32,9 @@ public class Solves {
 
     public int getSolveQuestNumber() {
         return solveQuestNumber;
+    }
+
+    public int getSumDistancesTraveled() {
+        return sumDistancesTraveled;
     }
 }

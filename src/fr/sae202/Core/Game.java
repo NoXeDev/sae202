@@ -52,7 +52,8 @@ public class Game {
             (ArrayList<Integer>)player.getFinishedQuests().stream().map(Quest::getQuestId).collect(Collectors.toList()),
             player.getPlayerTime(),
             player.getPlayerXp(),
-            player.getFinishedQuests().size()
+            player.getFinishedQuests().size(),
+            player.sumDistancesTraveled()
         );
 
         this.player.resetPlayer();

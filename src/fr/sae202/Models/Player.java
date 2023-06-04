@@ -140,4 +140,16 @@ public class Player {
     {
         printDebug = true;
     }
+
+
+    public int sumDistancesTraveled()
+    {
+        int sum = this.pTime;
+        for(Quest quest : this.pFinishedQuests)
+        {
+            sum -= quest.getQuestDuration();
+        }
+
+        return sum;
+    }
 }
