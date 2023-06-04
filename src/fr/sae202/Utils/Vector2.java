@@ -83,6 +83,12 @@ public class Vector2<T> {
         }
     }
 
+
+    /**
+     * Compare two vector2 and return true if the first is greater than the second
+     * @param vector2 the other vector2
+     * @return true if the first is greater than the second
+     */
     public boolean greaterThan(Vector2<T> vector2)
     {
         if(vector2.x == null || vector2.y == null || this.x == null || this.y == null)
@@ -99,6 +105,11 @@ public class Vector2<T> {
     }
     
 
+    /**
+     * Compare two vector2 and return true if the first is less than the second
+     * @param vector2 the other vector2
+     * @return true if the first is less than the second
+     */
     public boolean lessThan(Vector2<T> vector2)
     {
         if(vector2.x == null || vector2.y == null || this.x == null || this.y == null)
@@ -114,6 +125,10 @@ public class Vector2<T> {
         }
     }
 
+    /**
+     * Check if vector is empty
+     * @return true if vector is empty
+     */
     public boolean isEmpty()
     {
         if(this.x instanceof Vector2<?> && this.y instanceof Vector2<?>) {

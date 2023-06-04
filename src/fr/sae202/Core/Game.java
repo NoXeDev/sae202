@@ -20,6 +20,13 @@ public class Game {
        parser = new QuestParser("res");
    }
 
+   /**
+    * Greedy Effective solution for the level 1 of sae202
+    * @param scenarioId The scenario id
+    * @return The solves object obtain by the greedy effective solution
+    * @throws ScenarioNotFoundException
+    * @throws QuestParseException
+   */
    public Solves solutionEfficaceGloutonne(int scenarioId) throws ScenarioNotFoundException, QuestParseException
    {
         Scenario scenario = parser.parseScenario(scenarioId);

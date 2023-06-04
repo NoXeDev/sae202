@@ -114,7 +114,9 @@ public class Player {
         return pXp;
     }
 
-
+    /**
+     * Reset the player vars
+     */
     public void resetPlayer()
     {
         pFinishedQuests.clear();
@@ -123,11 +125,17 @@ public class Player {
         pTime = 0;
     }
 
+    /**
+     * Disable the print of all the players movements and other actions
+     */
     public void debugOff()
     {
         printDebug = false;
     }
 
+    /**
+     * Enable the print of all the players movements and other actions
+     */
     public void debugOn()
     {
         printDebug = true;
