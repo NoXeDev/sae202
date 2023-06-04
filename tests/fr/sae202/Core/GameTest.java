@@ -44,4 +44,19 @@ public class GameTest {
         assertTrue(testSolves.getSumDistancesTraveled() >= 14 || testSolves.getSumDistancesTraveled() <= 20); // Values provided by Mr Auger
 
     }
+
+
+    @Test 
+    @DisplayName("Greedy Exhaustive solution test")
+    public void solutionExhaustiveGloutonneTest()
+    {
+        Game game = new Game();
+        Solves testSolves = game.solutionExhaustiveGloutonne(scenario_0);
+
+        assertTrue(testSolves.getSolveDuration() >= 36 || testSolves.getSolveDuration() <= 40); // Values provided by Mr Auger
+        assertTrue(testSolves.getSolveXp() >= 550 || testSolves.getSolveXp() <= 550); // Values provided by Mr Auger
+        assertTrue(testSolves.getSolveQuestNumber() == 5); // Values provided by Mr Auger
+        assertTrue(testSolves.getSumDistancesTraveled() >= 20 || testSolves.getSumDistancesTraveled() <= 24); // Values provided by Mr Auger
+    }
+
 }
