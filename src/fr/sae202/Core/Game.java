@@ -36,13 +36,13 @@ public class Game {
    */
    public Solves solutionEfficaceGloutonne(Scenario scenario) throws ScenarioNotFoundException, QuestParseException
    {
-        Quest currentQuest = Algorithms.nearestFirstQuest(scenario);
+        Quest currentQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario, player), player);
     
         while(currentQuest.getQuestId() != 0)
         {
             player.movePlayer(currentQuest.getQuestPos());
             player.addFinishedQuest(currentQuest);
-            currentQuest = Algorithms.nearestNextQuest(scenario, player.getFinishedQuests(), this.player);
+            currentQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario, player), player);
         }
 
         player.movePlayer(currentQuest.getQuestPos());
