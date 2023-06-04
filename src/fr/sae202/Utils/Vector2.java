@@ -129,6 +129,7 @@ public class Vector2<T> {
      * Check if vector is empty
      * @return true if vector is empty
      */
+    @SuppressWarnings("unchecked")
     public boolean isEmpty()
     {
         if(this.x instanceof Vector2<?> && this.y instanceof Vector2<?>) {

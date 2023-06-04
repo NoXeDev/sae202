@@ -17,19 +17,25 @@ public class Game {
    public Game() {
        player = new Player();
        player.debugOff();
-       parser = new QuestParser("res");
    }
+
+   public Game(boolean printDebug) {
+        player = new Player();
+        if(printDebug) 
+            player.debugOn();
+        else
+            player.debugOff();
+    }
 
    /**
     * Greedy Effective solution for the level 1 of sae202
-    * @param scenarioId The scenario id
+    * @param scenario The scenario id
     * @return The solves object obtain by the greedy effective solution
     * @throws ScenarioNotFoundException
     * @throws QuestParseException
    */
-   public Solves solutionEfficaceGloutonne(int scenarioId) throws ScenarioNotFoundException, QuestParseException
+   public Solves solutionEfficaceGloutonne(Scenario scenario) throws ScenarioNotFoundException, QuestParseException
    {
-        Scenario scenario = parser.parseScenario(scenarioId);
         Quest currentQuest = Algorithms.nearestFirstQuest(scenario);
     
         while(currentQuest.getQuestId() != 0)
