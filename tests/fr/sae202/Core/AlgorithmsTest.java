@@ -41,13 +41,13 @@ public class AlgorithmsTest {
         player.movePlayer(scenario_0.getQuestMap().get(1).getQuestPos());
         player.addFinishedQuest(scenario_0.getQuestMap().get(1));
 
-        Quest nearestNextQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario_0, player), player);
+        Quest nearestNextQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario_0, player, true), player.getPlayerPos());
         assertEquals(nearestNextQuest, scenario_0.getQuestMap().get(2)); // The nearest next quest is the quest id 2
 
         player.movePlayer(nearestNextQuest.getQuestPos());
         player.addFinishedQuest(nearestNextQuest);
 
-        nearestNextQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario_0, player), player);
+        nearestNextQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario_0, player, true), player.getPlayerPos());
         assertEquals(nearestNextQuest, scenario_0.getQuestMap().get(4)); // The nearest next quest is the quest id 4
     }
 
@@ -59,11 +59,11 @@ public class AlgorithmsTest {
         Player player = new Player();
         player.movePlayer(scenario_0.getQuestMap().get(1).getQuestPos());
         player.addFinishedQuest(scenario_0.getQuestMap().get(1));
-        Quest nearestNextQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario_0, player), player);
+        Quest nearestNextQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario_0, player, true), player.getPlayerPos());
         player.movePlayer(nearestNextQuest.getQuestPos());
         player.addFinishedQuest(nearestNextQuest);
 
-        ArrayList<Quest> availableQuests = Algorithms.fetchAvailableQuests(scenario_0, player);
+        ArrayList<Quest> availableQuests = Algorithms.fetchAvailableQuests(scenario_0, player, true);
         assertEquals(availableQuests, Arrays.asList(questList.get(2), questList.get(3))); // The player can do quest number 3 and 4
     }
 }

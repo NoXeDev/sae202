@@ -36,13 +36,13 @@ public class Game {
    */
    public Solves solutionEfficaceGloutonne(Scenario scenario)
    {
-        Quest currentQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario, player), player);
+        Quest currentQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario, player, true), player.getPlayerPos());
     
         while(currentQuest.getQuestId() != 0)
         {
             player.movePlayer(currentQuest.getQuestPos());
             player.addFinishedQuest(currentQuest);
-            currentQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario, player), player);
+            currentQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario, player, true), player.getPlayerPos());
         }
 
         player.movePlayer(currentQuest.getQuestPos());
@@ -69,7 +69,7 @@ public class Game {
      */
     public Solves solutionExhaustiveGloutonne(Scenario scenario)
     {
-        ArrayList<Quest> availableQuests = Algorithms.fetchAvailableQuests(scenario, player);
+        ArrayList<Quest> availableQuests = Algorithms.fetchAvailableQuests(scenario, player, true);
 
         boolean gameLoop = true;
         while(gameLoop)
@@ -86,7 +86,7 @@ public class Game {
                 player.movePlayer(quest.getQuestPos());
                 player.addFinishedQuest(quest);
             }
-            availableQuests = Algorithms.fetchAvailableQuests(scenario, player);
+            availableQuests = Algorithms.fetchAvailableQuests(scenario, player, true);
         }
 
         Solves gameSolve = new Solves(
@@ -100,5 +100,19 @@ public class Game {
         this.player.resetPlayer();
 
         return gameSolve;
+    }
+
+
+    public Solves speedrun(Scenario scenario)
+    {
+        
+        
+        return new Solves(
+            null,
+            player.getPlayerTime(),
+            player.getPlayerXp(),
+            0,
+            player.sumDistancesTraveled()
+        );
     }
 }

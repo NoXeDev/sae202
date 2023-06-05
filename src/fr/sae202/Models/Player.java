@@ -11,6 +11,7 @@ public class Player {
     private Vector2<Integer> pPos;
     private int pTime;
     private boolean printDebug = true;
+    private Vector2<Integer> pOldPos;
 
     /**
      * Create a new player
@@ -20,6 +21,7 @@ public class Player {
         pXp = 0;
         pPos = new Vector2<>(0, 0);
         pTime = 0;
+        pOldPos = new Vector2<>(0, 0);
     }
 
     /**
@@ -31,6 +33,8 @@ public class Player {
             System.out.println("Se déplacer en "+newPosition.toString());
             
         pTime += Math.abs(this.pPos.getX() - newPosition.getX()) + Math.abs(this.pPos.getY() - newPosition.getY());
+        if(this.pOldPos != new Vector2<Integer>(0, 0))
+            this.pOldPos = this.pPos;
         this.pPos = newPosition;
     }
 
@@ -151,5 +155,18 @@ public class Player {
         }
 
         return sum;
+    }
+
+    public void rollBackQuest()
+    {
+        if(pFinishedQuests.size() == 0)
+            return;
+        Quest lastQuest = pFinishedQuests.get(pFinishedQuests.size() - 1);
+        if(lastQuest.getQuestId() != 0)
+            pXp -= lastQuest.getQuestXp();
+
+        pTime -= lastQuest.getQuestDuration();
+        pFinishedQuests.remove(lastQuest);
+        pPos = pOldPos;
     }
 }
