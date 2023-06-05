@@ -103,16 +103,35 @@ public class Game {
     }
 
 
-    public Solves speedrun(Scenario scenario)
+    /**
+     * Effective solution for the level 2 of sae202 (Speedrun solution)
+     * @param scenario The scenario id
+     * @return The solves object obtain by the speedrun solution
+     */
+    public Solves speedrun(Scenario scenario, int nSolutions)
     {
+        Player player = new Player();
+        player.debugOff();
+        ArrayList<ArrayList<Integer>> pathLists = Algorithms.findAllPaths(scenario, nSolutions);
+        System.out.println("All paths found : " + pathLists.size());
+        ArrayList<Integer> fastestPath = Algorithms.findFastestPath(scenario, pathLists);
+
+        for(Integer questId : fastestPath)
+        {
+            player.movePlayer(scenario.getQuestMap().get(questId).getQuestPos());
+            player.addFinishedQuest(scenario.getQuestMap().get(questId));
+        }
         
-        
-        return new Solves(
-            null,
+        Solves gameSolve = new Solves(
+            (ArrayList<Integer>)player.getFinishedQuests().stream().map(Quest::getQuestId).collect(Collectors.toList()),
             player.getPlayerTime(),
             player.getPlayerXp(),
-            0,
+            player.getFinishedQuests().size(),
             player.sumDistancesTraveled()
         );
+
+        this.player.resetPlayer();
+
+        return gameSolve;
     }
 }

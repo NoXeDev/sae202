@@ -1,7 +1,6 @@
 package fr.sae202.Core;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import fr.sae202.Models.Player;
@@ -101,7 +100,13 @@ public class Algorithms {
         return availableQuests;
     }
 
-    public static ArrayList<ArrayList<Integer>> findAllPaths(Scenario scenario) {
+    /**
+     * Find all path to finish the scenario
+     * @param scenario The scenario to search in
+     * @param nSolutions The number of solutions to find
+     * @return All valids paths for finish the scenario
+     */
+    public static ArrayList<ArrayList<Integer>> findAllPaths(Scenario scenario, int nSolutions) {
         Quest end = scenario.getQuestMap().get(0);
 
         ArrayList<ArrayList<Integer>> paths = new ArrayList<>();
@@ -110,30 +115,52 @@ public class Algorithms {
 
         Player player = new Player(); // Player simulation
         player.debugOff();
-        for(Quest start : fetchAvailableQuests(scenario, player, false))
+        ArrayList<Quest> availableQuests = fetchAvailableQuests(scenario, player, false);
+        for(Quest start : availableQuests)
         {
             player.movePlayer(start.getQuestPos());
             player.addFinishedQuest(start);
 
-            dfs(scenario, start, end, visited, path, paths, player);
+            int roundBonus = 0;
+            if(availableQuests.indexOf(start)+1 == availableQuests.size())
+            {
+                roundBonus = (nSolutions % availableQuests.size())*availableQuests.size();
+            }
+            dfs(scenario, start, end, visited, path, paths, player, (nSolutions/availableQuests.size())*(availableQuests.indexOf(start)+1) + roundBonus);
+            path = new ArrayList<>();
+            visited = new boolean[scenario.getQuestMap().size()];
             player.resetPlayer();
         }
-        enoughtExperienceFilter(scenario, paths); // put a first validation filter layer
+
         return paths;
     }
 
-    private static void dfs(Scenario scenario, Quest u, Quest end, boolean[] visited, ArrayList<Integer> path, ArrayList<ArrayList<Integer>> paths, Player player) {
+    /**
+     * DFS algorithm for find all paths
+     * @param scenario The scenario to search in
+     * @param u The start quest (current quest recursive)
+     * @param end The end quest
+     * @param visited is the node already have been visited
+     * @param path The current path
+     * @param paths All valids paths
+     * @param player The player
+     * @param nSolutions The number of solutions to find
+     */
+    private static void dfs(Scenario scenario, Quest u, Quest end, boolean[] visited, ArrayList<Integer> path, ArrayList<ArrayList<Integer>> paths, Player player, int nSolutions) {
+        if((nSolutions != 0) && (paths.size() >= nSolutions))
+                    return;
         visited[u.getQuestId()] = true;
         path.add(u.getQuestId());
 
         if (u == end) {
-            paths.add(new ArrayList<>(path));
+            if(enoughtExperienceFilter(scenario, path))
+                paths.add(new ArrayList<>(path));
         } else {
             for (Quest v : fetchAvailableQuests(scenario, player, false)) {
                 if (!visited[v.getQuestId()]) {
                     player.movePlayer(v.getQuestPos());
                     player.addFinishedQuest(v);
-                    dfs(scenario, v, end, visited, path, paths, player);
+                    dfs(scenario, v, end, visited, path, paths, player, nSolutions);
                 }
             }
         }
@@ -143,40 +170,42 @@ public class Algorithms {
         player.rollBackQuest();
     }
 
-    private static void enoughtExperienceFilter(Scenario scenario, ArrayList<ArrayList<Integer>> paths) {
-        ArrayList<ArrayList<Integer>> pathsToRemove = new ArrayList<>();
-        for(ArrayList<Integer> path : paths)
+    /**
+     * Filter paths with enought experience for finish the scenario (quest 0)
+     * @param scenario The scenario to search in
+     * @param paths All valids paths
+     */
+    private static boolean enoughtExperienceFilter(Scenario scenario, ArrayList<Integer> paths) {
+        int xp = 0;
+        for(Integer questId : paths)
         {
-            int xp = 0;
-            for(Integer questId : path)
-            {
-                if(questId == 0)
-                    continue;
-                xp += scenario.getQuestMap().get(questId).getQuestXp();
-            }
-            if(xp < scenario.getQuestMap().get(0).getQuestXp())
-            {
-                pathsToRemove.add(path);
-            }
+            if(questId == 0)
+                continue;
+            xp += scenario.getQuestMap().get(questId).getQuestXp();
+        }
+        if(xp < scenario.getQuestMap().get(0).getQuestXp())
+        {
+            return false;
         }
 
-        for(ArrayList<Integer> path : pathsToRemove)
-        {
-            paths.remove(path);
-        }
+        return true;
     }
 
+    /**
+     * Do a simulation of a path for find the fastest path
+     * @param scenario The scenario to search in
+     * @param paths All valids paths
+     * @return The fastest path
+     */
     public static ArrayList<Integer> findFastestPath(Scenario scenario, ArrayList<ArrayList<Integer>> paths)
     {
         ArrayList<Integer> fastestPath = null;
         Solves fastestSolves = null;
-        ArrayList<Solves> debugSolves = new ArrayList<>();
         for(ArrayList<Integer> path : paths)
         {
             if(fastestSolves == null)
             {
                 fastestSolves = doPathSimulation(scenario, path);
-                debugSolves.add(fastestSolves);
             }
             else
             {
@@ -186,13 +215,17 @@ public class Algorithms {
                     fastestSolves = solve;
                     fastestPath = path;
                 }
-                debugSolves.add(solve);
             }
         }
-        System.out.println(debugSolves);
         return fastestPath;
     }
 
+    /**
+     * Do a simulation of a path
+     * @param scenario The scenario to search in
+     * @param path The path to simulate
+     * @return The simulation result
+     */
     private static Solves doPathSimulation(Scenario scenario, ArrayList<Integer> path)
     {
         Player player = new Player();
