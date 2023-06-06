@@ -81,7 +81,7 @@ public class AlgorithmsTest {
         awaitedResult.add(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 0)));
         awaitedResult.add(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 3, 0)));
 
-        ArrayList<ArrayList<Integer>> result = Algorithms.findAllPaths(scenario_0, 0, false);
+        ArrayList<ArrayList<Integer>> result = Algorithms.findAllPaths(scenario_0, false);
 
         assertEquals(result, awaitedResult);
     }
@@ -98,7 +98,7 @@ public class AlgorithmsTest {
         pathsTest.add(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 3, 0)));
 
 
-        ArrayList<Solves> results = Algorithms.effectiveFastestPath(scenario_0, pathsTest);
+        ArrayList<Solves> results = Algorithms.effectiveFastestPath(scenario_0, pathsTest, 0, false);
 
         ArrayList<Integer> awaitedResult = new ArrayList<Integer>(Arrays.asList(1, 2, 4, 0));
 
