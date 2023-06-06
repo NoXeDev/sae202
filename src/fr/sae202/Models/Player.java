@@ -157,6 +157,9 @@ public class Player {
         return sum;
     }
 
+    /**
+     * Rollback the last quest (useful for dfs algorithm)
+     */
     public void rollBackQuest()
     {
         if(pFinishedQuests.size() == 0)

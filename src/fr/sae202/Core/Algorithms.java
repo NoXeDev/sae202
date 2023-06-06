@@ -37,6 +37,12 @@ public class Algorithms {
         return nearestQuest;
     }
 
+    /**
+     * Find the nearest and fastest quest available
+     * @param availableQuests Available quests
+     * @param playerPos The player position
+     * @return The nearest and fastest quest
+     */
     public static Quest nearestAndFastestQuest(ArrayList<Quest> availableQuests, Vector2<Integer> playerPos)
     {
         Quest nearestQuest = null;
@@ -235,6 +241,11 @@ public class Algorithms {
         );
     }
 
+    /**
+     * Sort a list with insertion sort
+     * @param list The list to sort
+     * @param f property filter to sort quests
+     */
     public static void insertionSort(ArrayList<Solves> list, Function<Solves, Integer> f) {
         int n = list.size();
 

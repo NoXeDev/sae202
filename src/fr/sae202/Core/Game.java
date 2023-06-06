@@ -104,12 +104,23 @@ public class Game {
 
 
     /**
-     * Effective solution for the level 2 of sae202 (Speedrun solution)
+     * Effective solution that return the best path for speedrun scenario
      * @param scenario The scenario id
      * @return The solves object obtain by the speedrun solution
      */
     public Solves speedrun(Scenario scenario, int nSolutions)
     {
         return Algorithms.findFastestPath(scenario, Algorithms.findAllPaths(scenario, nSolutions)).get(0);
+    }
+
+    /**
+     * Return the best speedruns for a scenario
+     * @param scenario The scenario id
+     * @param nSolutions The number of solutions to find
+     * @return The list of the best speedruns
+     */
+    public ArrayList<Solves> bestSpeedruns(Scenario scenario, int nSolutions)
+    {
+        return Algorithms.findFastestPath(scenario, Algorithms.findAllPaths(scenario, nSolutions));
     }
 }
