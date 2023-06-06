@@ -2,7 +2,7 @@
 ## Ewen GILBERT - Noé COSTE - INF1-A
 
 ---
-| Test de la classe Date                    | Version: 1.0     |
+| Test de la classe QuestParser             | Version: 1.0     |
 |-------------------------------------------|------------------|
 | Document: Dossier de tests                | Date: 20/05/2023 |
 | Responsable de la rédaction: Ewen GILBERT |
@@ -14,7 +14,7 @@ Ce document est un dossier de test portant sur le QuestParser, étant le systèm
 
 Cette procédure a pour objectif de tester l'ensemble de la classe QuestParser à l'aide de plusieurs fonctions de test qui permettent de tester tous les cas possibles. Nous utiliserons pour cela JUnit. Nous exécutons les méthodes de la classe QuestParser, suivant plusieurs cas et contrôlant sa fiabilité. Nous utiliserons donc un test en boîte noire, qui permet donc de contrôler la valeur de sortie du programme.
 
-## 3.	Description des information à enregistrer pour les tests
+## 3.	Description des informations à enregistrer pour les tests
 
 ### 1. Campagne de test
 
@@ -30,10 +30,10 @@ Cette procédure a pour objectif de tester l'ensemble de la classe QuestParser �
 
 #### 1. Test de la méthode parseScenarioTest()
 
-| Test de la méthode parseScenarioTest()        | Version: 1.0     |
-|-------------------------------------------|------------------|
-| Document: Dossier de tests                | Date: 20/05/2023 |
-| Responsable de la rédaction: Ewen GILBERT |
+| Test de la méthode parseScenarioTest()     | Version: 1.0     |
+|--------------------------------------------|------------------|
+| Document: Dossier de tests                 | Date: 20/05/2023 |
+| Responsable de la rédaction: Ewen GILBERT  |
 
 | Classe | Valeur nulle                                  | Résultat attendu      |
 |--------|-----------------------------------------------|-----------------------|
@@ -45,26 +45,26 @@ Cette procédure a pour objectif de tester l'ensemble de la classe QuestParser �
 
 #### 2. Test de la méthode parseScenarioExceptionsTest()
 
-| Test de la méthode parseScenarioExceptionsTest()       | Version: 1.0     |
-|-------------------------------------------|------------------|
-| Document: Dossier de tests                | Date: 20/05/2023 |
-| Responsable de la rédaction: Ewen GILBERT |
+| Test de la méthode parseScenarioExceptionsTest() | Version: 1.0     |
+|--------------------------------------------------|------------------|
+| Document: Dossier de tests                       | Date: 20/05/2023 |
+| Responsable de la rédaction: Ewen GILBERT        |
 
-| Classe | Cas à tester              | Résultat attendu      |
-|--------|---------------------------|-----------------------|
+| Classe | Cas à tester              | Résultat attendu          |
+|--------|---------------------------|---------------------------|
 | C1     | ID de scénario non trouvé | ScenarioNotFoundException |
-| C2     | Scénario donné invalide   | QuestParseException |
+| C2     | Scénario donné invalide   | QuestParseException       |
 
 ### 3. Résulats de tests
 
 #### 1. Test de la méthode parseScenarioTest()
 
-| Test de la méthode parseScenarioTest()        | Version: 1.0 |
-|-------------------------------------------| --- |
+| Test de la méthode parseScenarioTest()    | Version: 1.0     |
+|-------------------------------------------|------------------|
 | Document: Dossier de tests                | Date: 20/05/2023 |
 | Responsable de la rédaction: Ewen GILBERT |
 
-| Classe | Année n                                       | Résultat attendu       | Résultat observé      | Résultat du test |
+| Classe | Valeur nulle                                  | Résultat attendu       | Résultat observé      | Résultat du test |
 |--------|-----------------------------------------------|------------------------|-----------------------|------------------|
 | C1     | Précondition                                  | Pas d'exception levée  | Pas d'exception levée | OK               | 
 | C2     | Seconde valeur de précondition                | Pas d'exception levée  | Pas d'exception levée | OK               |
@@ -74,12 +74,12 @@ Cette procédure a pour objectif de tester l'ensemble de la classe QuestParser �
 
 #### 2. Test de la méthode parseScenarioExceptionsTest()
 
-| Test de la méthode parseScenarioExceptionsTest()       | Version: 1.0     |
-|-------------------------------------------|------------------|
-| Document: Dossier de tests                | Date: 20/05/2023 |
-| Responsable de la rédaction: Ewen GILBERT |
+| Test de la méthode parseScenarioExceptionsTest() | Version: 1.0     |
+|--------------------------------------------------|------------------|
+| Document: Dossier de tests                       | Date: 20/05/2023 |
+| Responsable de la rédaction: Ewen GILBERT        |
 
-| Classe | Cas à tester              | Résultat attendu      | Résultat observé | Résultat du test |
-|--------|---------------------------|-----------------------|------------------|------------------|
-| C1     | ID de scénario non trouvé | ScenarioNotFoundException | ScenarioNotFoundException | OK |
-| C2     | Scénario donné invalide   | QuestParseException | QuestParseException |  OK |
+| Classe | Cas à tester              | Résultat attendu          | Résultat observé          | Résultat du test  |
+|--------|---------------------------|---------------------------|---------------------------|-------------------|
+| C1     | ID de scénario non trouvé | ScenarioNotFoundException | ScenarioNotFoundException | OK                |
+| C2     | Scénario donné invalide   | QuestParseException       | QuestParseException       | OK                |
