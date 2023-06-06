@@ -12,7 +12,7 @@ public class App {
             QuestParser parser = new QuestParser("res");
 
             long startTime = System.nanoTime();
-            Solves algoSolve = mainGame.speedrun(parser.parseScenario(3), 100);
+            Solves algoSolve = mainGame.speedrun(parser.parseScenario(0), 0);
             long endTime = System.nanoTime();
             long duration = (endTime - startTime) / 1000000;
             

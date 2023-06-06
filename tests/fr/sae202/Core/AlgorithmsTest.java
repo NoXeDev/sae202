@@ -66,4 +66,40 @@ public class AlgorithmsTest {
         ArrayList<Quest> availableQuests = Algorithms.fetchAvailableQuests(scenario_0, player, true);
         assertEquals(availableQuests, Arrays.asList(questList.get(2), questList.get(3))); // The player can do quest number 3 and 4
     }
+
+    @Test
+    @DisplayName("Find all paths Test")
+    @Order(3)
+    public void findAllPathsTest()
+    {
+        // Known and verified result
+        ArrayList<ArrayList<Integer>> awaitedResult = new ArrayList<ArrayList<Integer>>();
+        awaitedResult.add(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 0)));
+        awaitedResult.add(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 0)));
+        awaitedResult.add(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 0)));
+        awaitedResult.add(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 3, 0)));
+
+        ArrayList<ArrayList<Integer>> result = Algorithms.findAllPaths(scenario_0, 0);
+
+        assertEquals(result, awaitedResult);
+    }
+
+    @Test
+    @DisplayName("Find fastest path Test")
+    @Order(4)
+    public void findFastestPathTest()
+    {
+        ArrayList<ArrayList<Integer>> pathsTest = new ArrayList<ArrayList<Integer>>();
+        pathsTest.add(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 0)));
+        pathsTest.add(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 0)));
+        pathsTest.add(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 0)));
+        pathsTest.add(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 3, 0)));
+
+
+        ArrayList<Integer> result = Algorithms.findFastestPath(scenario_0, pathsTest);
+
+        ArrayList<Integer> awaitedResult = new ArrayList<Integer>(Arrays.asList(1, 2, 4, 0));
+
+        assertEquals(result, awaitedResult);
+    }
 }
