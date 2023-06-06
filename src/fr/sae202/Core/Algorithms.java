@@ -3,6 +3,8 @@ package fr.sae202.Core;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import com.google.common.base.Function;
+
 import fr.sae202.Models.Player;
 import fr.sae202.Models.Quest;
 import fr.sae202.Models.Scenario;
@@ -197,27 +199,15 @@ public class Algorithms {
      * @param paths All valids paths
      * @return The fastest path
      */
-    public static ArrayList<Integer> findFastestPath(Scenario scenario, ArrayList<ArrayList<Integer>> paths)
+    public static ArrayList<Solves> findFastestPath(Scenario scenario, ArrayList<ArrayList<Integer>> paths)
     {
-        ArrayList<Integer> fastestPath = null;
-        Solves fastestSolves = null;
+        ArrayList<Solves> solves = new ArrayList<>();
         for(ArrayList<Integer> path : paths)
         {
-            if(fastestSolves == null)
-            {
-                fastestSolves = doPathSimulation(scenario, path);
-            }
-            else
-            {
-                Solves solve = doPathSimulation(scenario, path);
-                if(solve.getSolveDuration() < fastestSolves.getSolveDuration())
-                {
-                    fastestSolves = solve;
-                    fastestPath = path;
-                }
-            }
+            solves.add(doPathSimulation(scenario, path));
         }
-        return fastestPath;
+        insertionSort(solves, (Solves s1) -> s1.getSolveDuration());
+        return solves;
     }
 
     /**
@@ -243,5 +233,21 @@ public class Algorithms {
             player.getFinishedQuests().size(),
             player.sumDistancesTraveled()
         );
+    }
+
+    public static void insertionSort(ArrayList<Solves> list, Function<Solves, Integer> f) {
+        int n = list.size();
+
+        for (int i = 1; i < n; i++) {
+            Solves key = list.get(i);
+            int j = i - 1;
+
+            while (j >= 0 && f.apply(list.get(j)) > f.apply(key)) {
+                list.set(j + 1, list.get(j));
+                j--;
+            }
+
+            list.set(j + 1, key);
+        }
     }
 }

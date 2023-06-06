@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import fr.sae202.Models.Player;
 import fr.sae202.Models.Quest;
 import fr.sae202.Models.Scenario;
+import fr.sae202.Models.Solves;
 import fr.sae202.Utils.Vector2;
 
 public class AlgorithmsTest {
@@ -96,10 +97,10 @@ public class AlgorithmsTest {
         pathsTest.add(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 3, 0)));
 
 
-        ArrayList<Integer> result = Algorithms.findFastestPath(scenario_0, pathsTest);
+        ArrayList<Solves> results = Algorithms.findFastestPath(scenario_0, pathsTest);
 
         ArrayList<Integer> awaitedResult = new ArrayList<Integer>(Arrays.asList(1, 2, 4, 0));
 
-        assertEquals(result, awaitedResult);
+        assertEquals(results.get(0).getSolveList(), awaitedResult);
     }
 }

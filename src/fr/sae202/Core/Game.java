@@ -110,28 +110,6 @@ public class Game {
      */
     public Solves speedrun(Scenario scenario, int nSolutions)
     {
-        Player player = new Player();
-        player.debugOff();
-        ArrayList<ArrayList<Integer>> pathLists = Algorithms.findAllPaths(scenario, nSolutions);
-        System.out.println("All paths found : " + pathLists.size());
-        ArrayList<Integer> fastestPath = Algorithms.findFastestPath(scenario, pathLists);
-
-        for(Integer questId : fastestPath)
-        {
-            player.movePlayer(scenario.getQuestMap().get(questId).getQuestPos());
-            player.addFinishedQuest(scenario.getQuestMap().get(questId));
-        }
-        
-        Solves gameSolve = new Solves(
-            (ArrayList<Integer>)player.getFinishedQuests().stream().map(Quest::getQuestId).collect(Collectors.toList()),
-            player.getPlayerTime(),
-            player.getPlayerXp(),
-            player.getFinishedQuests().size(),
-            player.sumDistancesTraveled()
-        );
-
-        this.player.resetPlayer();
-
-        return gameSolve;
+        return Algorithms.findFastestPath(scenario, Algorithms.findAllPaths(scenario, nSolutions)).get(0);
     }
 }
