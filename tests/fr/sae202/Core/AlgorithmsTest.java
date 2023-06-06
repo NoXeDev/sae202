@@ -39,6 +39,7 @@ public class AlgorithmsTest {
     public void nearestQuestTest()
     {
         Player player = new Player();
+        player.debugOff();
         player.movePlayer(scenario_0.getQuestMap().get(1).getQuestPos());
         player.addFinishedQuest(scenario_0.getQuestMap().get(1));
 
@@ -80,7 +81,7 @@ public class AlgorithmsTest {
         awaitedResult.add(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 0)));
         awaitedResult.add(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 3, 0)));
 
-        ArrayList<ArrayList<Integer>> result = Algorithms.findAllPaths(scenario_0, 0);
+        ArrayList<ArrayList<Integer>> result = Algorithms.findAllPaths(scenario_0, 0, false);
 
         assertEquals(result, awaitedResult);
     }

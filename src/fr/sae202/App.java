@@ -14,7 +14,7 @@ public class App {
             QuestParser parser = new QuestParser("res");
 
             long startTime = System.nanoTime();
-            ArrayList<Solves> algoSolve = mainGame.bestDistancePath(parser.parseScenario(1), 100);
+            ArrayList<Solves> algoSolve = mainGame.bestDistancePath(parser.parseScenario(6), 10, true);
             long endTime = System.nanoTime();
             long duration = (endTime - startTime) / 1000000;
             

@@ -110,7 +110,7 @@ public class Game {
      */
     public Solves speedrun(Scenario scenario, int nSolutions)
     {
-        return Algorithms.effectiveFastestPath(scenario, Algorithms.findAllPaths(scenario, nSolutions)).get(0);
+        return Algorithms.effectiveFastestPath(scenario, Algorithms.findAllPaths(scenario, nSolutions, false)).get(0);
     }
 
     /**
@@ -119,9 +119,9 @@ public class Game {
      * @param nSolutions The number of solutions to find
      * @return The list of the best speedruns
      */
-    public ArrayList<Solves> bestSpeedruns(Scenario scenario, int nSolutions)
+    public ArrayList<Solves> bestSpeedruns(Scenario scenario, int nSolutions, boolean isExhaustive)
     {
-        return Algorithms.effectiveFastestPath(scenario, Algorithms.findAllPaths(scenario, nSolutions));
+        return Algorithms.effectiveFastestPath(scenario, Algorithms.findAllPaths(scenario, nSolutions, isExhaustive));
     }
 
     /**
@@ -130,9 +130,9 @@ public class Game {
      * @param nSolutions The number of solutions to find
      * @return The list of the best speedruns
      */
-    public ArrayList<Solves> bestNBQuests(Scenario scenario, int nSolutions)
+    public ArrayList<Solves> bestNBQuests(Scenario scenario, int nSolutions, boolean isExhaustive)
     {
-        return Algorithms.effectiveShortestNBQuestsPath(scenario, Algorithms.findAllPaths(scenario, nSolutions));
+        return Algorithms.effectiveShortestNBQuestsPath(scenario, Algorithms.findAllPaths(scenario, nSolutions, isExhaustive));
     }
 
     /**
@@ -141,8 +141,8 @@ public class Game {
      * @param nSolutions The number of solutions to find 
      * @return The list of the best speedruns
      */
-    public ArrayList<Solves> bestDistancePath(Scenario scenario, int nSolutions)
+    public ArrayList<Solves> bestDistancePath(Scenario scenario, int nSolutions, boolean isExhaustive)
     {
-        return Algorithms.effectiveShortestDistancePath(scenario, Algorithms.findAllPaths(scenario, nSolutions));
+        return Algorithms.effectiveShortestDistancePath(scenario, Algorithms.findAllPaths(scenario, nSolutions, isExhaustive));
     }
 }

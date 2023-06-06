@@ -114,7 +114,7 @@ public class Algorithms {
      * @param nSolutions The number of solutions to find
      * @return All valids paths for finish the scenario
      */
-    public static ArrayList<ArrayList<Integer>> findAllPaths(Scenario scenario, int nSolutions) {
+    public static ArrayList<ArrayList<Integer>> findAllPaths(Scenario scenario, int nSolutions, boolean isExhaustive) {
         Quest end = scenario.getQuestMap().get(0);
 
         ArrayList<ArrayList<Integer>> paths = new ArrayList<>();
@@ -134,7 +134,7 @@ public class Algorithms {
             {
                 roundBonus = (nSolutions % availableQuests.size())*availableQuests.size();
             }
-            dfs(scenario, start, end, visited, path, paths, player, (nSolutions/availableQuests.size())*(availableQuests.indexOf(start)+1) + roundBonus);
+            dfs(scenario, start, end, visited, path, paths, player, (nSolutions/availableQuests.size())*(availableQuests.indexOf(start)+1) + roundBonus, isExhaustive);
             path = new ArrayList<>();
             visited = new boolean[scenario.getQuestMap().size()];
             player.resetPlayer();
@@ -154,21 +154,21 @@ public class Algorithms {
      * @param player The player
      * @param nSolutions The number of solutions to find
      */
-    private static void dfs(Scenario scenario, Quest u, Quest end, boolean[] visited, ArrayList<Integer> path, ArrayList<ArrayList<Integer>> paths, Player player, int nSolutions) {
+    private static void dfs(Scenario scenario, Quest u, Quest end, boolean[] visited, ArrayList<Integer> path, ArrayList<ArrayList<Integer>> paths, Player player, int nSolutions, boolean isExhaustive) {
         if((nSolutions != 0) && (paths.size() >= nSolutions))
                     return;
         visited[u.getQuestId()] = true;
         path.add(u.getQuestId());
 
         if (u == end) {
-            if(enoughtExperienceFilter(scenario, path))
+            if(enoughtExperienceFilter(scenario, path) && (isExhaustive && (path.size() == scenario.getQuestMap().size())))
                 paths.add(new ArrayList<>(path));
         } else {
             for (Quest v : fetchAvailableQuests(scenario, player, false)) {
                 if (!visited[v.getQuestId()]) {
                     player.movePlayer(v.getQuestPos());
                     player.addFinishedQuest(v);
-                    dfs(scenario, v, end, visited, path, paths, player, nSolutions);
+                    dfs(scenario, v, end, visited, path, paths, player, nSolutions, isExhaustive);
                 }
             }
         }
