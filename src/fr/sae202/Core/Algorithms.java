@@ -114,7 +114,7 @@ public class Algorithms {
      * @param nSolutions The number of solutions to find
      * @return All valids paths for finish the scenario
      */
-    public static ArrayList<ArrayList<Integer>> findAllPaths(Scenario scenario, int nSolutions) {
+    public static ArrayList<ArrayList<Integer>> findAllPaths(Scenario scenario, boolean isExhaustive) {
         Quest end = scenario.getQuestMap().get(0);
 
         ArrayList<ArrayList<Integer>> paths = new ArrayList<>();
@@ -129,12 +129,10 @@ public class Algorithms {
             player.movePlayer(start.getQuestPos());
             player.addFinishedQuest(start);
 
-            int roundBonus = 0;
-            if(availableQuests.indexOf(start)+1 == availableQuests.size())
-            {
-                roundBonus = (nSolutions % availableQuests.size())*availableQuests.size();
-            }
-            dfs(scenario, start, end, visited, path, paths, player, (nSolutions/availableQuests.size())*(availableQuests.indexOf(start)+1) + roundBonus);
+            int fetchSolutions = 0;
+            if(scenario.getScenarioId() >= 6)
+                fetchSolutions = 20_000;
+            dfs(scenario, start, end, visited, path, paths, player, fetchSolutions, isExhaustive);
             path = new ArrayList<>();
             visited = new boolean[scenario.getQuestMap().size()];
             player.resetPlayer();
@@ -154,7 +152,7 @@ public class Algorithms {
      * @param player The player
      * @param nSolutions The number of solutions to find
      */
-    private static void dfs(Scenario scenario, Quest u, Quest end, boolean[] visited, ArrayList<Integer> path, ArrayList<ArrayList<Integer>> paths, Player player, int nSolutions) {
+    private static void dfs(Scenario scenario, Quest u, Quest end, boolean[] visited, ArrayList<Integer> path, ArrayList<ArrayList<Integer>> paths, Player player, int nSolutions, boolean isExhaustive) {
         if((nSolutions != 0) && (paths.size() >= nSolutions))
                     return;
         visited[u.getQuestId()] = true;
@@ -162,15 +160,18 @@ public class Algorithms {
 
         if (u == end) {
             if(enoughtExperienceFilter(scenario, path))
-                paths.add(new ArrayList<>(path));
+                if(isExhaustive && (path.size() == scenario.getQuestMap().size()))
+                    paths.add(new ArrayList<>(path));
+                else if(!isExhaustive)
+                    paths.add(new ArrayList<>(path));
         } else {
             for (Quest v : fetchAvailableQuests(scenario, player, false)) {
                 if (!visited[v.getQuestId()]) {
                     player.movePlayer(v.getQuestPos());
                     player.addFinishedQuest(v);
-                    dfs(scenario, v, end, visited, path, paths, player, nSolutions);
+                    dfs(scenario, v, end, visited, path, paths, player, nSolutions, isExhaustive);
                 }
-            }
+            } 
         }
 
         visited[u.getQuestId()] = false;
@@ -205,14 +206,14 @@ public class Algorithms {
      * @param paths All valids paths
      * @return The fastest path
      */
-    public static ArrayList<Solves> effectiveFastestPath(Scenario scenario, ArrayList<ArrayList<Integer>> paths)
+    public static ArrayList<Solves> effectiveFastestPath(Scenario scenario, ArrayList<ArrayList<Integer>> paths, int nSolutions, boolean worthFilter)
     {
         ArrayList<Solves> solves = new ArrayList<>();
         for(ArrayList<Integer> path : paths)
         {
             solves.add(doPathSimulation(scenario, path));
         }
-        insertionSort(solves, (Solves s1) -> s1.getSolveDuration());
+        insertionSort(solves, (Solves s1) -> s1.getSolveDuration(), nSolutions, worthFilter);
         return solves;
     }
 
@@ -222,14 +223,14 @@ public class Algorithms {
      * @param paths
      * @return
      */
-    public static ArrayList<Solves> effectiveShortestNBQuestsPath(Scenario scenario, ArrayList<ArrayList<Integer>> paths)
+    public static ArrayList<Solves> effectiveShortestNBQuestsPath(Scenario scenario, ArrayList<ArrayList<Integer>> paths, int nSolutions, boolean worthFilter)
     {
         ArrayList<Solves> solves = new ArrayList<>();
         for(ArrayList<Integer> path : paths)
         {
             solves.add(doPathSimulation(scenario, path));
         }
-        insertionSort(solves, (Solves s1) -> s1.getSolveQuestNumber());
+        insertionSort(solves, (Solves s1) -> s1.getSolveQuestNumber(), nSolutions, worthFilter);
         return solves;
     }
 
@@ -239,14 +240,14 @@ public class Algorithms {
      * @param paths All valids paths
      * @return The shortest path in distance
      */
-    public static ArrayList<Solves> effectiveShortestDistancePath(Scenario scenario, ArrayList<ArrayList<Integer>> paths)
+    public static ArrayList<Solves> effectiveShortestDistancePath(Scenario scenario, ArrayList<ArrayList<Integer>> paths, int nSolutions, boolean worthFilter)
     {
         ArrayList<Solves> solves = new ArrayList<>();
         for(ArrayList<Integer> path : paths)
         {
             solves.add(doPathSimulation(scenario, path));
         }
-        insertionSort(solves, (Solves s1) -> s1.getSumDistancesTraveled());
+        insertionSort(solves, (Solves s1) -> s1.getSumDistancesTraveled(), nSolutions, worthFilter);
         return solves;
     }
 
@@ -280,16 +281,26 @@ public class Algorithms {
      * @param list The list to sort
      * @param f property filter to sort quests
      */
-    public static void insertionSort(ArrayList<Solves> list, Function<Solves, Integer> f) {
-        int n = list.size();
+    public static void insertionSort(ArrayList<Solves> list, Function<Solves, Integer> f, int nSolutions, boolean reverse) {
+        int n = (nSolutions == 0) ? list.size() : nSolutions;
 
         for (int i = 1; i < n; i++) {
             Solves key = list.get(i);
             int j = i - 1;
 
-            while (j >= 0 && f.apply(list.get(j)) > f.apply(key)) {
-                list.set(j + 1, list.get(j));
-                j--;
+            if(reverse)
+            {
+                while (j >= 0 && f.apply(list.get(j)) < f.apply(key)) {
+                    list.set(j + 1, list.get(j));
+                    j--;
+                }
+            }
+            else
+            {
+                while (j >= 0 && f.apply(list.get(j)) > f.apply(key)) {
+                    list.set(j + 1, list.get(j));
+                    j--;
+                }
             }
 
             list.set(j + 1, key);
