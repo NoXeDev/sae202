@@ -132,7 +132,7 @@ public class Algorithms {
             int roundBonus = 0;
             if(availableQuests.indexOf(start)+1 == availableQuests.size())
             {
-                roundBonus = (nSolutions % availableQuests.size())*availableQuests.size();
+                roundBonus = (nSolutions % availableQuests.size());
             }
             dfs(scenario, start, end, visited, path, paths, player, (nSolutions/availableQuests.size())*(availableQuests.indexOf(start)+1) + roundBonus, isExhaustive);
             path = new ArrayList<>();
@@ -161,8 +161,11 @@ public class Algorithms {
         path.add(u.getQuestId());
 
         if (u == end) {
-            if(enoughtExperienceFilter(scenario, path) && (isExhaustive && (path.size() == scenario.getQuestMap().size())))
-                paths.add(new ArrayList<>(path));
+            if(enoughtExperienceFilter(scenario, path))
+                if(isExhaustive && (path.size() == scenario.getQuestMap().size()))
+                    paths.add(new ArrayList<>(path));
+                else if(!isExhaustive)
+                    paths.add(new ArrayList<>(path));
         } else {
             for (Quest v : fetchAvailableQuests(scenario, player, false)) {
                 if (!visited[v.getQuestId()]) {
@@ -170,7 +173,7 @@ public class Algorithms {
                     player.addFinishedQuest(v);
                     dfs(scenario, v, end, visited, path, paths, player, nSolutions, isExhaustive);
                 }
-            }
+            } 
         }
 
         visited[u.getQuestId()] = false;
