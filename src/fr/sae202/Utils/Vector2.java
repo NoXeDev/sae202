@@ -140,4 +140,15 @@ public class Vector2<T> {
             return false;
         }
     }
+
+    /**
+     * Calculate the distance between two vector2
+     * @param a     the first vector2
+     * @param b    the second vector2
+     * @return the distance between the two vector2
+     */
+    public static int distance(Vector2<Integer> a, Vector2<Integer> b)
+    {
+        return Math.abs(a.getX() - b.getX()) + Math.abs(a.getY() - b.getY());
+    }
 }

@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import fr.sae202.Models.Player;
 import fr.sae202.Models.Quest;
 import fr.sae202.Models.Scenario;
+import fr.sae202.Models.Solves;
 import fr.sae202.Utils.Vector2;
 
 public class AlgorithmsTest {
@@ -41,13 +42,13 @@ public class AlgorithmsTest {
         player.movePlayer(scenario_0.getQuestMap().get(1).getQuestPos());
         player.addFinishedQuest(scenario_0.getQuestMap().get(1));
 
-        Quest nearestNextQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario_0, player), player);
+        Quest nearestNextQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario_0, player, true), player.getPlayerPos());
         assertEquals(nearestNextQuest, scenario_0.getQuestMap().get(2)); // The nearest next quest is the quest id 2
 
         player.movePlayer(nearestNextQuest.getQuestPos());
         player.addFinishedQuest(nearestNextQuest);
 
-        nearestNextQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario_0, player), player);
+        nearestNextQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario_0, player, true), player.getPlayerPos());
         assertEquals(nearestNextQuest, scenario_0.getQuestMap().get(4)); // The nearest next quest is the quest id 4
     }
 
@@ -59,11 +60,47 @@ public class AlgorithmsTest {
         Player player = new Player();
         player.movePlayer(scenario_0.getQuestMap().get(1).getQuestPos());
         player.addFinishedQuest(scenario_0.getQuestMap().get(1));
-        Quest nearestNextQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario_0, player), player);
+        Quest nearestNextQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario_0, player, true), player.getPlayerPos());
         player.movePlayer(nearestNextQuest.getQuestPos());
         player.addFinishedQuest(nearestNextQuest);
 
-        ArrayList<Quest> availableQuests = Algorithms.fetchAvailableQuests(scenario_0, player);
+        ArrayList<Quest> availableQuests = Algorithms.fetchAvailableQuests(scenario_0, player, true);
         assertEquals(availableQuests, Arrays.asList(questList.get(2), questList.get(3))); // The player can do quest number 3 and 4
+    }
+
+    @Test
+    @DisplayName("Find all paths Test")
+    @Order(3)
+    public void findAllPathsTest()
+    {
+        // Known and verified result
+        ArrayList<ArrayList<Integer>> awaitedResult = new ArrayList<ArrayList<Integer>>();
+        awaitedResult.add(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 0)));
+        awaitedResult.add(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 0)));
+        awaitedResult.add(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 0)));
+        awaitedResult.add(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 3, 0)));
+
+        ArrayList<ArrayList<Integer>> result = Algorithms.findAllPaths(scenario_0, 0);
+
+        assertEquals(result, awaitedResult);
+    }
+
+    @Test
+    @DisplayName("Find fastest path Test")
+    @Order(4)
+    public void findFastestPathTest()
+    {
+        ArrayList<ArrayList<Integer>> pathsTest = new ArrayList<ArrayList<Integer>>();
+        pathsTest.add(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 0)));
+        pathsTest.add(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 0)));
+        pathsTest.add(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 0)));
+        pathsTest.add(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 3, 0)));
+
+
+        ArrayList<Solves> results = Algorithms.effectiveFastestPath(scenario_0, pathsTest);
+
+        ArrayList<Integer> awaitedResult = new ArrayList<Integer>(Arrays.asList(1, 2, 4, 0));
+
+        assertEquals(results.get(0).getSolveList(), awaitedResult);
     }
 }
