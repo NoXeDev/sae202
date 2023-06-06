@@ -205,7 +205,7 @@ public class Algorithms {
      * @param paths All valids paths
      * @return The fastest path
      */
-    public static ArrayList<Solves> findFastestPath(Scenario scenario, ArrayList<ArrayList<Integer>> paths)
+    public static ArrayList<Solves> effectiveFastestPath(Scenario scenario, ArrayList<ArrayList<Integer>> paths)
     {
         ArrayList<Solves> solves = new ArrayList<>();
         for(ArrayList<Integer> path : paths)
@@ -213,6 +213,40 @@ public class Algorithms {
             solves.add(doPathSimulation(scenario, path));
         }
         insertionSort(solves, (Solves s1) -> s1.getSolveDuration());
+        return solves;
+    }
+
+    /**
+     * Do a simulation of a path for find the shortest path in number of quests
+     * @param scenario
+     * @param paths
+     * @return
+     */
+    public static ArrayList<Solves> effectiveShortestNBQuestsPath(Scenario scenario, ArrayList<ArrayList<Integer>> paths)
+    {
+        ArrayList<Solves> solves = new ArrayList<>();
+        for(ArrayList<Integer> path : paths)
+        {
+            solves.add(doPathSimulation(scenario, path));
+        }
+        insertionSort(solves, (Solves s1) -> s1.getSolveQuestNumber());
+        return solves;
+    }
+
+    /**
+     * Do a simulation of a path for find the shortest path in distance
+     * @param scenario The scenario to search in
+     * @param paths All valids paths
+     * @return The shortest path in distance
+     */
+    public static ArrayList<Solves> effectiveShortestDistancePath(Scenario scenario, ArrayList<ArrayList<Integer>> paths)
+    {
+        ArrayList<Solves> solves = new ArrayList<>();
+        for(ArrayList<Integer> path : paths)
+        {
+            solves.add(doPathSimulation(scenario, path));
+        }
+        insertionSort(solves, (Solves s1) -> s1.getSumDistancesTraveled());
         return solves;
     }
 

@@ -110,7 +110,7 @@ public class Game {
      */
     public Solves speedrun(Scenario scenario, int nSolutions)
     {
-        return Algorithms.findFastestPath(scenario, Algorithms.findAllPaths(scenario, nSolutions)).get(0);
+        return Algorithms.effectiveFastestPath(scenario, Algorithms.findAllPaths(scenario, nSolutions)).get(0);
     }
 
     /**
@@ -121,6 +121,28 @@ public class Game {
      */
     public ArrayList<Solves> bestSpeedruns(Scenario scenario, int nSolutions)
     {
-        return Algorithms.findFastestPath(scenario, Algorithms.findAllPaths(scenario, nSolutions));
+        return Algorithms.effectiveFastestPath(scenario, Algorithms.findAllPaths(scenario, nSolutions));
+    }
+
+    /**
+     * Return quests with the shortest number of quests
+     * @param scenario The scenario id
+     * @param nSolutions The number of solutions to find
+     * @return The list of the best speedruns
+     */
+    public ArrayList<Solves> bestNBQuests(Scenario scenario, int nSolutions)
+    {
+        return Algorithms.effectiveShortestNBQuestsPath(scenario, Algorithms.findAllPaths(scenario, nSolutions));
+    }
+
+    /**
+     * Return quests with the shortest distance traveled
+     * @param scenario The scenario id
+     * @param nSolutions The number of solutions to find 
+     * @return The list of the best speedruns
+     */
+    public ArrayList<Solves> bestDistancePath(Scenario scenario, int nSolutions)
+    {
+        return Algorithms.effectiveShortestDistancePath(scenario, Algorithms.findAllPaths(scenario, nSolutions));
     }
 }

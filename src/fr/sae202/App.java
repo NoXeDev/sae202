@@ -1,5 +1,7 @@
 package fr.sae202;
 
+import java.util.ArrayList;
+
 import fr.sae202.Core.Game;
 import fr.sae202.Core.QuestParser;
 import fr.sae202.Exceptions.QuestParseException;
@@ -12,16 +14,18 @@ public class App {
             QuestParser parser = new QuestParser("res");
 
             long startTime = System.nanoTime();
-            Solves algoSolve = mainGame.speedrun(parser.parseScenario(4), 0);
+            ArrayList<Solves> algoSolve = mainGame.bestDistancePath(parser.parseScenario(1), 100);
             long endTime = System.nanoTime();
             long duration = (endTime - startTime) / 1000000;
             
-            System.out.println("Speedrun solved in : " + duration + " milliseconds");
-            System.out.println(algoSolve.getSolveList());
-            System.out.println("Durée total : " + algoSolve.getSolveDuration());
-            System.out.println("XP total : " + algoSolve.getSolveXp());
-            System.out.println("Nombre de quêtes résolues : " + algoSolve.getSolveQuestNumber());
-            System.out.println("Distance totale parcourue : " + algoSolve.getSumDistancesTraveled());
+            for(Solves solve : algoSolve) {
+                System.out.println("Speedrun solved in : " + duration + " milliseconds");
+                System.out.println(solve.getSolveList());
+                System.out.println("Durée total : " + solve.getSolveDuration());
+                System.out.println("XP total : " + solve.getSolveXp());
+                System.out.println("Nombre de quêtes résolues : " + solve.getSolveQuestNumber());
+                System.out.println("Distance totale parcourue : " + solve.getSumDistancesTraveled());
+            }
         } catch (ScenarioNotFoundException | QuestParseException e) {
             e.printStackTrace();
         }
