@@ -130,8 +130,8 @@ public class Algorithms {
             player.addFinishedQuest(start);
 
             int fetchSolutions = 0;
-            if(scenario.getScenarioId() >= 8)
-                fetchSolutions = 500_000;
+            if(scenario.getScenarioId() >= 6)
+                fetchSolutions = 20_000;
             dfs(scenario, start, end, visited, path, paths, player, fetchSolutions, isExhaustive);
             path = new ArrayList<>();
             visited = new boolean[scenario.getQuestMap().size()];
