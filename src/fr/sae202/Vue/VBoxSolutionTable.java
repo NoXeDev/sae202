@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.TableView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Contains the solution table.
@@ -70,7 +71,7 @@ public class VBoxSolutionTable extends VBox{
         solveQuestsColumn.setPrefWidth(120);
         solveQuestsColumn.setId("Column");
 
-        solutionTable.getColumns().addAll(solveQuestListColumn,solveDurationColumn,solveXpColumn,solveDistanceColumn,solveQuestsColumn);
+        solutionTable.getColumns().addAll(Arrays.asList(solveQuestListColumn,solveDurationColumn,solveXpColumn,solveDistanceColumn,solveQuestsColumn));
         solutionTable.setId("tab");
         this.setPrefWidth(800);
         this.setPadding(new Insets(50,50,50,50));

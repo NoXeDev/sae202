@@ -1,19 +1,15 @@
 package fr.sae202.Controller;
 
 import fr.sae202.Models.Selection;
-import fr.sae202.Vue.VBoxMenu;
 import fr.sae202.Vue.VBoxRoot;
 import fr.sae202.Models.Constants;
-import fr.sae202.Vue.VBoxSolutionTable;
-import javafx.event.Event;
+import javafx.event.ActionEvent;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.Button;
 
 import javafx.event.EventHandler;
 
-import java.util.Scanner;
-
-public class MainController implements EventHandler {
+public class MainController implements EventHandler<ActionEvent> {
     private int SelectedScenario = 0;
     private int SelectedType = 0;
     private int SelectedCriteria = 0;
@@ -21,9 +17,7 @@ public class MainController implements EventHandler {
     private Selection currentSelection = new Selection(SelectedScenario, SelectedType, SelectedCriteria, SelectedOrder);
 
     @Override
-    public void handle(Event event) {
-        VBoxMenu menu = VBoxRoot.getVBoxMenu();
-
+    public void handle(ActionEvent event) {
         if (event.getSource() instanceof RadioMenuItem) {
             RadioMenuItem selectedMenuItem = (RadioMenuItem) event.getSource();
             String selectedMenu = selectedMenuItem.getParentMenu().getText();
