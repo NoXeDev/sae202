@@ -110,7 +110,7 @@ public class Game {
      */
     public Solves speedrun(Scenario scenario, int nSolutions)
     {
-        return Algorithms.effectiveFastestPath(scenario, Algorithms.findAllPaths(scenario, false), nSolutions, false).get(0);
+        return Algorithms.fastestPath(scenario, Algorithms.findAllPaths(scenario, false), nSolutions, false).get(0);
     }
 
     /**
@@ -121,7 +121,7 @@ public class Game {
      */
     public ArrayList<Solves> bestSpeedruns(Scenario scenario, int nSolutions, boolean isExhaustive, boolean worthFilter)
     {
-        return Algorithms.effectiveFastestPath(scenario, Algorithms.findAllPaths(scenario, isExhaustive), nSolutions, worthFilter);
+        return Algorithms.fastestPath(scenario, Algorithms.findAllPaths(scenario, isExhaustive), nSolutions, worthFilter);
     }
 
     /**
@@ -132,7 +132,7 @@ public class Game {
      */
     public ArrayList<Solves> bestNBQuests(Scenario scenario, int nSolutions, boolean isExhaustive, boolean worthFilter)
     {
-        return Algorithms.effectiveShortestNBQuestsPath(scenario, Algorithms.findAllPaths(scenario, isExhaustive), nSolutions, worthFilter);
+        return Algorithms.shortestNBQuestsPath(scenario, Algorithms.findAllPaths(scenario, isExhaustive), nSolutions, worthFilter);
     }
 
     /**
@@ -143,6 +143,6 @@ public class Game {
      */
     public ArrayList<Solves> bestDistancePath(Scenario scenario, int nSolutions, boolean isExhaustive, boolean worthFilter)
     {
-        return Algorithms.effectiveShortestDistancePath(scenario, Algorithms.findAllPaths(scenario, isExhaustive), nSolutions, worthFilter);
+        return Algorithms.shortestDistancePath(scenario, Algorithms.findAllPaths(scenario, isExhaustive), nSolutions, worthFilter);
     }
 }

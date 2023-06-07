@@ -98,7 +98,7 @@ public class AlgorithmsTest {
         pathsTest.add(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 3, 0)));
 
 
-        ArrayList<Solves> results = Algorithms.effectiveFastestPath(scenario_0, pathsTest, 0, false);
+        ArrayList<Solves> results = Algorithms.fastestPath(scenario_0, pathsTest, 0, false);
 
         ArrayList<Integer> awaitedResult = new ArrayList<Integer>(Arrays.asList(1, 2, 4, 0));
 

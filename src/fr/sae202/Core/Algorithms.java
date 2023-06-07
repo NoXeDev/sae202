@@ -15,7 +15,6 @@ public class Algorithms {
     /**
     * Find the nearest quest available
     * @param availableQuests Available quests
-    * @param player The player
     * @return The nearest quest
     */
     public static Quest nearestQuest(ArrayList<Quest> availableQuests, Vector2<Integer> playerPos)
@@ -66,7 +65,6 @@ public class Algorithms {
     /**
     * Search for all available quests with the actual finished quests
     * @param scenario The scenario to search in
-    * @param finishedQuests Finished quests
     * @param player The player
     * @return All available quests
     */
@@ -111,7 +109,6 @@ public class Algorithms {
     /**
      * Find all path to finish the scenario
      * @param scenario The scenario to search in
-     * @param nSolutions The number of solutions to find
      * @return All valids paths for finish the scenario
      */
     public static ArrayList<ArrayList<Integer>> findAllPaths(Scenario scenario, boolean isExhaustive) {
@@ -206,32 +203,29 @@ public class Algorithms {
      * @param paths All valids paths
      * @return The fastest path
      */
-    public static ArrayList<Solves> effectiveFastestPath(Scenario scenario, ArrayList<ArrayList<Integer>> paths, int nSolutions, boolean worthFilter)
+    public static ArrayList<Solves> fastestPath(Scenario scenario, ArrayList<ArrayList<Integer>> paths, int nSolutions, boolean worthFilter)
     {
         ArrayList<Solves> solves = new ArrayList<>();
         for(ArrayList<Integer> path : paths)
         {
             solves.add(doPathSimulation(scenario, path));
         }
-        insertionSort(solves, (Solves s1) -> s1.getSolveDuration(), nSolutions, worthFilter);
-        return solves;
+        return insertionSort(solves, (Solves s1) -> s1.getSolveDuration(), nSolutions, worthFilter);
     }
 
     /**
      * Do a simulation of a path for find the shortest path in number of quests
-     * @param scenario
-     * @param paths
-     * @return
+     * @param scenario The scenario to search in
+     * @param paths All valids paths
+     * @return The shortest path in number of quests
      */
-    public static ArrayList<Solves> effectiveShortestNBQuestsPath(Scenario scenario, ArrayList<ArrayList<Integer>> paths, int nSolutions, boolean worthFilter)
+    public static ArrayList<Solves> shortestNBQuestsPath(Scenario scenario, ArrayList<ArrayList<Integer>> paths, int nSolutions, boolean worthFilter)
     {
         ArrayList<Solves> solves = new ArrayList<>();
-        for(ArrayList<Integer> path : paths)
-        {
+        for(ArrayList<Integer> path : paths) {
             solves.add(doPathSimulation(scenario, path));
         }
-        insertionSort(solves, (Solves s1) -> s1.getSolveQuestNumber(), nSolutions, worthFilter);
-        return solves;
+        return insertionSort(solves, (Solves s1) -> s1.getSolveQuestNumber(), nSolutions, worthFilter);
     }
 
     /**
@@ -240,15 +234,14 @@ public class Algorithms {
      * @param paths All valids paths
      * @return The shortest path in distance
      */
-    public static ArrayList<Solves> effectiveShortestDistancePath(Scenario scenario, ArrayList<ArrayList<Integer>> paths, int nSolutions, boolean worthFilter)
+    public static ArrayList<Solves> shortestDistancePath(Scenario scenario, ArrayList<ArrayList<Integer>> paths, int nSolutions, boolean worthFilter)
     {
         ArrayList<Solves> solves = new ArrayList<>();
         for(ArrayList<Integer> path : paths)
         {
             solves.add(doPathSimulation(scenario, path));
         }
-        insertionSort(solves, (Solves s1) -> s1.getSumDistancesTraveled(), nSolutions, worthFilter);
-        return solves;
+        return insertionSort(solves, (Solves s1) -> s1.getSumDistancesTraveled(), nSolutions, worthFilter);
     }
 
     /**
@@ -281,29 +274,37 @@ public class Algorithms {
      * @param list The list to sort
      * @param f property filter to sort quests
      */
-    public static void insertionSort(ArrayList<Solves> list, Function<Solves, Integer> f, int nSolutions, boolean reverse) {
+    public static ArrayList<Solves> insertionSort(ArrayList<Solves> list, Function<Solves, Integer> f, int nSolutions, boolean reverse) {
+        ArrayList<Solves> sortedList = new ArrayList<>();
         int n = (nSolutions == 0) ? list.size() : nSolutions;
+        if(nSolutions != 0)
+            for(int i = 0; i < n; i++) {
+                sortedList.add(list.get(i));
+            }
+        else
+            sortedList = list;
 
         for (int i = 1; i < n; i++) {
-            Solves key = list.get(i);
+            Solves key = sortedList.get(i);
             int j = i - 1;
 
             if(reverse)
             {
-                while (j >= 0 && f.apply(list.get(j)) < f.apply(key)) {
-                    list.set(j + 1, list.get(j));
+                while (j >= 0 && f.apply(sortedList.get(j)) < f.apply(key)) {
+                    sortedList.set(j + 1, sortedList.get(j));
                     j--;
                 }
             }
             else
             {
-                while (j >= 0 && f.apply(list.get(j)) > f.apply(key)) {
-                    list.set(j + 1, list.get(j));
+                while (j >= 0 && f.apply(sortedList.get(j)) > f.apply(key)) {
+                    sortedList.set(j + 1, sortedList.get(j));
                     j--;
                 }
             }
 
-            list.set(j + 1, key);
+            sortedList.set(j + 1, key);
         }
+        return sortedList;
     }
 }
