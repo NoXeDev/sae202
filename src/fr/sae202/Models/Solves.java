@@ -37,4 +37,13 @@ public class Solves {
     public int getSumDistancesTraveled() {
         return sumDistancesTraveled;
     }
+
+    @Override
+    public String toString() {
+        return "Solve : " + solveList + "\n" +
+            "Durée total : " + solveDuration + "\n" +
+            "XP total : " + solveXp + "\n" +
+            "Nombre de quêtes résolues : " + solveQuestNumber + "\n" +
+            "Distance totale parcourue : " + sumDistancesTraveled + "\n";
+    }
 }

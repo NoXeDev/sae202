@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +15,9 @@ import fr.sae202.Utils.Vector2;
 
 public class GameTest {
     ArrayList<Quest> questList = new ArrayList<Quest>();
+    ArrayList<Quest> questList2 = new ArrayList<Quest>();
     Scenario scenario_0;
+    Scenario scenario_1;
 
     public GameTest()
     {
@@ -29,6 +30,17 @@ public class GameTest {
             new Quest(0, new Vector2<Integer>(1, 1), new Vector2<Vector2<Integer>>(new Vector2<Integer>(3, 4), null), 4, 350, "vaincre Araignée lunaire")
         ));
         scenario_0 = new Scenario(0, questList.stream().collect(Collectors.toMap(quest -> quest.getQuestId(), quest -> quest)));
+
+        // Hand parsed scenario_1.txt (need valids quest for algorithms tests)
+        questList2.addAll(Arrays.asList(
+            new Quest(2, new Vector2<Integer>(2, 2), new Vector2<Vector2<Integer>>(new Vector2<Integer>(4, 1), null), 2, 100, "explorer tombeau de Reha Thalor"),
+            new Quest(5, new Vector2<Integer>(4, 3), new Vector2<Vector2<Integer>>(new Vector2<Integer>(1, 4), new Vector2<Integer>(2, null)), 1, 150, "explorer jardin de Syhe Lenora"),
+            new Quest(3, new Vector2<Integer>(1, 0), new Vector2<Vector2<Integer>>(new Vector2<Integer>(4, null), new Vector2<Integer>(1, 2)), 7, 100, "dialoguer avec Morrigan la déesse de la mort"),
+            new Quest(1, new Vector2<Integer>(3, 1), null, 2, 50, "dialoguer avec Alaric le mage noir"),
+            new Quest(4, new Vector2<Integer>(4, 0), null, 2, 100, "explorer porte de Ifha Ennore"),
+            new Quest(0, new Vector2<Integer>(2, 3), new Vector2<Vector2<Integer>>(new Vector2<Integer>(3, null), null), 3, 400, "explorer collines de Kortorhm")
+        ));
+        scenario_1 = new Scenario(1, questList2.stream().collect(Collectors.toMap(quest -> quest.getQuestId(), quest -> quest)));
     }
 
     @Test
@@ -59,4 +71,47 @@ public class GameTest {
         assertTrue(testSolves.getSumDistancesTraveled() >= 20 || testSolves.getSumDistancesTraveled() <= 24); // Values provided by Mr Auger
     }
 
+    @Test
+    @DisplayName("Speedrun solution test")
+    public void speedrunTest()
+    {
+        Game game = new Game();
+        Solves testSolves = game.speedrun(scenario_1, 0);
+
+        // known speedrun path
+        assertTrue(testSolves.getSolveList().equals(new ArrayList<Integer>(Arrays.asList(1, 4, 3, 2, 5, 0))));
+    }
+
+    @Test
+    @DisplayName("Best Speedruns solution test")
+    public void bestSpeedrunsTest()
+    {
+        Game game = new Game();
+        ArrayList<Solves> testSolves = game.bestSpeedruns(scenario_1, 0, false, false);
+
+        // known speedrun path
+        assertTrue(testSolves.get(0).getSolveList().equals(new ArrayList<Integer>(Arrays.asList(1, 4, 3, 2, 5, 0))));
+    }
+
+    @Test
+    @DisplayName("Speedrun solution test")
+    public void bestNBQuestsTest()
+    {
+        Game game = new Game();
+        ArrayList<Solves> testSolves = game.bestNBQuests(scenario_1, 0, false, false);
+
+        // known speedrun path
+        assertTrue(testSolves.get(0).getSolveList().equals(new ArrayList<Integer>(Arrays.asList(4, 2, 3, 5, 0))));
+    }
+
+    @Test
+    @DisplayName("Speedrun solution test")
+    public void bestDistancePathTest()
+    {
+        Game game = new Game();
+        ArrayList<Solves> testSolves = game.bestDistancePath(scenario_1, 0, false, false);
+
+        // known speedrun path
+        assertTrue(testSolves.get(0).getSolveList().equals(new ArrayList<Integer>(Arrays.asList(1, 4, 3, 2, 5, 0))));
+    }
 }

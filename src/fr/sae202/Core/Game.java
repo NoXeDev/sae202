@@ -36,13 +36,13 @@ public class Game {
    */
    public Solves solutionEfficaceGloutonne(Scenario scenario)
    {
-        Quest currentQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario, player), player);
+        Quest currentQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario, player, true), player.getPlayerPos());
     
         while(currentQuest.getQuestId() != 0)
         {
             player.movePlayer(currentQuest.getQuestPos());
             player.addFinishedQuest(currentQuest);
-            currentQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario, player), player);
+            currentQuest = Algorithms.nearestQuest(Algorithms.fetchAvailableQuests(scenario, player, true), player.getPlayerPos());
         }
 
         player.movePlayer(currentQuest.getQuestPos());
@@ -69,7 +69,7 @@ public class Game {
      */
     public Solves solutionExhaustiveGloutonne(Scenario scenario)
     {
-        ArrayList<Quest> availableQuests = Algorithms.fetchAvailableQuests(scenario, player);
+        ArrayList<Quest> availableQuests = Algorithms.fetchAvailableQuests(scenario, player, true);
 
         boolean gameLoop = true;
         while(gameLoop)
@@ -86,7 +86,7 @@ public class Game {
                 player.movePlayer(quest.getQuestPos());
                 player.addFinishedQuest(quest);
             }
-            availableQuests = Algorithms.fetchAvailableQuests(scenario, player);
+            availableQuests = Algorithms.fetchAvailableQuests(scenario, player, true);
         }
 
         Solves gameSolve = new Solves(
@@ -100,5 +100,49 @@ public class Game {
         this.player.resetPlayer();
 
         return gameSolve;
+    }
+
+
+    /**
+     * Effective solution that return the best path for speedrun scenario
+     * @param scenario The scenario id
+     * @return The solves object obtain by the speedrun solution
+     */
+    public Solves speedrun(Scenario scenario, int nSolutions)
+    {
+        return Algorithms.fastestPath(scenario, Algorithms.findAllPaths(scenario, false), nSolutions, false).get(0);
+    }
+
+    /**
+     * Return the best speedruns for a scenario
+     * @param scenario The scenario id
+     * @param nSolutions The number of solutions to find
+     * @return The list of the best speedruns
+     */
+    public ArrayList<Solves> bestSpeedruns(Scenario scenario, int nSolutions, boolean isExhaustive, boolean worthFilter)
+    {
+        return Algorithms.fastestPath(scenario, Algorithms.findAllPaths(scenario, isExhaustive), nSolutions, worthFilter);
+    }
+
+    /**
+     * Return quests with the shortest number of quests
+     * @param scenario The scenario id
+     * @param nSolutions The number of solutions to find
+     * @return The list of the best speedruns
+     */
+    public ArrayList<Solves> bestNBQuests(Scenario scenario, int nSolutions, boolean isExhaustive, boolean worthFilter)
+    {
+        return Algorithms.shortestNBQuestsPath(scenario, Algorithms.findAllPaths(scenario, isExhaustive), nSolutions, worthFilter);
+    }
+
+    /**
+     * Return quests with the shortest distance traveled
+     * @param scenario The scenario id
+     * @param nSolutions The number of solutions to find 
+     * @return The list of the best speedruns
+     */
+    public ArrayList<Solves> bestDistancePath(Scenario scenario, int nSolutions, boolean isExhaustive, boolean worthFilter)
+    {
+        return Algorithms.shortestDistancePath(scenario, Algorithms.findAllPaths(scenario, isExhaustive), nSolutions, worthFilter);
     }
 }
