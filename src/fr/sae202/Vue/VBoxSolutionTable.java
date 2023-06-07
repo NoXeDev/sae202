@@ -14,15 +14,17 @@ import java.util.Map;
 public class VBoxSolutionTable extends VBox{
     private Selection selection;
     private TableView <Solves> solutionTable;
-    public VBoxSolutionTable(Map<Integer,Solves> solvesMap){
+    public VBoxSolutionTable(){
         super(15);
         solutionTable = new TableView<>();
+        /**
         TableColumn <Solves, Integer> solveIdColumn = new TableColumn<>(Constants.TABLE_HEADER[0]);
         solveIdColumn.setCellValueFactory((new PropertyValueFactory<>("solveId")));
         solveIdColumn.setReorderable(false);
         solveIdColumn.setResizable(false);
         solveIdColumn.setPrefWidth(100);
         solveIdColumn.setId("Column");
+         */
         TableColumn <Solves, ArrayList<Integer>> solveQuestListColumn = new TableColumn<>(Constants.TABLE_HEADER[1]);
         solveQuestListColumn.setCellValueFactory(new PropertyValueFactory<>("solveList"));
         solveQuestListColumn.setReorderable(false);
@@ -54,14 +56,13 @@ public class VBoxSolutionTable extends VBox{
         solveQuestsColumn.setPrefWidth(100);
         solveQuestsColumn.setId("Column");
 
-        solutionTable.getColumns().addAll(solveIdColumn,solveQuestListColumn,solveDurationColumn,solveXpColumn,solveDistanceColumn,solveQuestsColumn);
+        solutionTable.getColumns().addAll(solveQuestListColumn,solveDurationColumn,solveXpColumn,solveDistanceColumn,solveQuestsColumn);
         solutionTable.setId("tab");
         this.setPrefWidth(800);
         this.setPadding(new Insets(50,50,50,50));
 
 
-        //this.update(blabla);
-        //A COMPLETER APRES IMPLEMENTATION MULTIPLE SOLUTION
+        this.update(new Selection(0,0,0,0),1);
 
         this.getChildren().add(solutionTable);
     }
@@ -69,9 +70,7 @@ public class VBoxSolutionTable extends VBox{
     public void update(Selection updatedSelection, int nbSolves){
         this.selection = updatedSelection;
         solutionTable.getItems().clear();
-        solutionTable.getItems().addAll(selection.getFinalSolvesMap(nbSolves).values());
-
-        //A COMPLETER APRES IMPLEMENTATION MULTIPLE SOLUTION
+        solutionTable.getItems().addAll(selection.getFinalSolves(nbSolves));
     }
 
 

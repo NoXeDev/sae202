@@ -14,11 +14,11 @@ import javafx.event.EventHandler;
 import java.util.Scanner;
 
 public class MainController implements EventHandler {
-    private int SelectedScenario;
-    private int SelectedType;
-    private int SelectedCriteria;
-    private int SelectedOrder;
-    private Selection currentSelection;
+    private int SelectedScenario = 0;
+    private int SelectedType = 0;
+    private int SelectedCriteria = 0;
+    private int SelectedOrder = 0;
+    private Selection currentSelection = new Selection(SelectedScenario, SelectedType, SelectedCriteria, SelectedOrder);
 
     @Override
     public void handle(Event event) {
@@ -65,7 +65,6 @@ public class MainController implements EventHandler {
                 }
             }
             currentSelection = new Selection(SelectedScenario, SelectedType, SelectedCriteria, SelectedOrder);
-            VBoxRoot.getVBoxSolutionTable().update(currentSelection,-1);
         }
         if (event.getSource() instanceof Button) {
             switch (((Button) event.getSource()).getAccessibleText()) {
