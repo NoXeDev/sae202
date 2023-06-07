@@ -7,6 +7,8 @@ import fr.sae202.Core.QuestParser;
 import fr.sae202.Exceptions.QuestParseException;
 import fr.sae202.Exceptions.ScenarioNotFoundException;
 import fr.sae202.Models.Solves;
+import fr.sae202.Vue.VueApp;
+
 public class App {
     public static void main(String[] args) {
         Game mainGame = new Game();
@@ -29,5 +31,6 @@ public class App {
         } catch (ScenarioNotFoundException | QuestParseException e) {
             e.printStackTrace();
         }
+        VueApp.run(args);
     }
 }

@@ -1,0 +1,28 @@
+#title{
+    -fx-font-size: 3em;
+    -fx-font-weight: bold;
+}
+
+.button{
+    -fx-spacing: 10;
+    -fx-alignment: center;
+    -fx-font-size: 2em;
+}
+
+#label{
+    -fx-font-size: 1.5em;
+}
+
+#TextField{
+    -fx-font-size: 1.2em;
+}
+
+#Error{
+    -fx-font-size: 1.2em;
+    -fx-text-fill: red;
+}
+
+#Confirm{
+    -fx-font-size: 1.2em;
+    -fx-text-fill: green;
+}
