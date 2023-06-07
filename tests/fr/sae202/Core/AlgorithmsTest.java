@@ -87,6 +87,19 @@ public class AlgorithmsTest {
     }
 
     @Test
+    @DisplayName("Find all paths exhaustive version Test")
+    @Order(3)
+    public void findAllPathsExhaustiveTest()
+    {
+        ArrayList<ArrayList<Integer>> result = Algorithms.findAllPaths(scenario_0, true);
+
+        for(ArrayList<Integer> path : result)
+        {
+            assertEquals(path.size(), result.get(0).size()); // Check if all paths have the same size
+        }
+    }
+
+    @Test
     @DisplayName("Find fastest path Test")
     @Order(4)
     public void findFastestPathTest()
@@ -99,9 +112,54 @@ public class AlgorithmsTest {
 
 
         ArrayList<Solves> results = Algorithms.fastestPath(scenario_0, pathsTest, 0, false);
+        ArrayList<Solves> worthResults = Algorithms.fastestPath(scenario_0, pathsTest, 0, true);
 
         ArrayList<Integer> awaitedResult = new ArrayList<Integer>(Arrays.asList(1, 2, 4, 0));
+        ArrayList<Integer> awaitedWorthResult = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 0));
 
         assertEquals(results.get(0).getSolveList(), awaitedResult);
+        assertEquals(worthResults.get(0).getSolveList(), awaitedWorthResult);
+    }
+
+    @Test
+    @DisplayName("Find shortest path in number of quests Test")
+    @Order(5)
+    public void shortestNBQuestsPathTest()
+    {
+        ArrayList<ArrayList<Integer>> pathsTest = new ArrayList<ArrayList<Integer>>();
+        pathsTest.add(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 0)));
+        pathsTest.add(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 0)));
+        pathsTest.add(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 0)));
+        pathsTest.add(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 3, 0)));
+
+        ArrayList<Solves> results = Algorithms.shortestNBQuestsPath(scenario_0, pathsTest, 0, false);
+        ArrayList<Solves> worthResults = Algorithms.shortestDistancePath(scenario_0, pathsTest, 0, true);
+
+        ArrayList<Integer> awaitedResult = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 0));
+        ArrayList<Integer> awaitedWorthResult = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 0));
+
+        assertEquals(results.get(0).getSolveList(), awaitedResult);
+        assertEquals(worthResults.get(0).getSolveList(), awaitedWorthResult);
+    }
+
+    @Test
+    @DisplayName("Find shortest path in distance of quests Test")
+    @Order(6)
+    public void shortestDistancePathTest()
+    {
+        ArrayList<ArrayList<Integer>> pathsTest = new ArrayList<ArrayList<Integer>>();
+        pathsTest.add(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 0)));
+        pathsTest.add(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 0)));
+        pathsTest.add(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 0)));
+        pathsTest.add(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 3, 0)));
+
+        ArrayList<Solves> results = Algorithms.shortestDistancePath(scenario_0, pathsTest, 0, false);
+        ArrayList<Solves> worthResults = Algorithms.shortestDistancePath(scenario_0, pathsTest, 0, true);
+
+        ArrayList<Integer> awaitedResult = new ArrayList<Integer>(Arrays.asList(1, 2, 4, 0));
+        ArrayList<Integer> awaitedWorthResult = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 0));
+
+        assertEquals(results.get(0).getSolveList(), awaitedResult);
+        assertEquals(worthResults.get(0).getSolveList(), awaitedWorthResult);
     }
 }

@@ -277,7 +277,7 @@ public class Algorithms {
      */
     public static ArrayList<Solves> insertionSort(ArrayList<Solves> list, Function<Solves, Integer> f, int nSolutions, boolean reverse) {
         int n = list.size();
-        int resultBound = (nSolutions > list.size()) ? list.size() : nSolutions;
+        int resultBound = (nSolutions > list.size() || nSolutions == 0) ? list.size() : nSolutions;
 
         for (int i = 1; i < n; i++) {
             Solves key = list.get(i);
