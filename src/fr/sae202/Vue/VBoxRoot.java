@@ -15,7 +15,7 @@ public class VBoxRoot extends VBox {
     private static VBoxSolutionTable solutionTable;
     private static MainController mainController = new MainController();
     public VBoxRoot(){
-        super(40);
+        super(10);
         menu = new VBoxMenu();
         header = new VBoxHeader();
         solutionTable = new VBoxSolutionTable();

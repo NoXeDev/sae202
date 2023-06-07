@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 public class VBoxHeader extends VBox {
     private Label scenario;
     private TextField nbSolutions;
+    private Label headMessage;
 
     public VBoxHeader(){
         super(10);
@@ -27,7 +28,7 @@ public class VBoxHeader extends VBox {
         solutions.setId("label");
 
         nbSolutions = new TextField();
-        nbSolutions.setId("ComboBox");
+        nbSolutions.setId("TextField");
 
         inputSolutions.getChildren().addAll(solutions, nbSolutions);
 
@@ -35,7 +36,9 @@ public class VBoxHeader extends VBox {
         buttonConfirm.setAccessibleText("buttonConfirm");
         buttonConfirm.addEventHandler(ActionEvent.ACTION, mainController);
 
-        this.getChildren().addAll(scenario, inputSolutions, buttonConfirm);
+        headMessage = new Label("");
+
+        this.getChildren().addAll(scenario, inputSolutions, headMessage, buttonConfirm);
 
     }
 
@@ -45,5 +48,9 @@ public class VBoxHeader extends VBox {
 
     public String getNbSolutions(){
         return nbSolutions.getText();
+    }
+
+    public Label getHeadMessage(){
+        return headMessage;
     }
 }

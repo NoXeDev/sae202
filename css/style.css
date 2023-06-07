@@ -13,6 +13,16 @@
     -fx-font-size: 1.5em;
 }
 
-#ComboBox{
+#TextField{
     -fx-font-size: 1.2em;
+}
+
+#Error{
+    -fx-font-size: 1.2em;
+    -fx-text-fill: red;
+}
+
+#Confirm{
+    -fx-font-size: 1.2em;
+    -fx-text-fill: green;
 }
