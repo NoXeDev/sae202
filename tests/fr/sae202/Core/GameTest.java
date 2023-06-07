@@ -81,4 +81,37 @@ public class GameTest {
         // known speedrun path
         assertTrue(testSolves.getSolveList().equals(new ArrayList<Integer>(Arrays.asList(1, 4, 3, 2, 5, 0))));
     }
+
+    @Test
+    @DisplayName("Best Speedruns solution test")
+    public void bestSpeedrunsTest()
+    {
+        Game game = new Game();
+        ArrayList<Solves> testSolves = game.bestSpeedruns(scenario_1, 0, false, false);
+
+        // known speedrun path
+        assertTrue(testSolves.get(0).getSolveList().equals(new ArrayList<Integer>(Arrays.asList(1, 4, 3, 2, 5, 0))));
+    }
+
+    @Test
+    @DisplayName("Speedrun solution test")
+    public void bestNBQuestsTest()
+    {
+        Game game = new Game();
+        ArrayList<Solves> testSolves = game.bestNBQuests(scenario_1, 0, false, false);
+
+        // known speedrun path
+        assertTrue(testSolves.get(0).getSolveList().equals(new ArrayList<Integer>(Arrays.asList(4, 2, 3, 5, 0))));
+    }
+
+    @Test
+    @DisplayName("Speedrun solution test")
+    public void bestDistancePathTest()
+    {
+        Game game = new Game();
+        ArrayList<Solves> testSolves = game.bestDistancePath(scenario_1, 0, false, false);
+
+        // known speedrun path
+        assertTrue(testSolves.get(0).getSolveList().equals(new ArrayList<Integer>(Arrays.asList(1, 4, 3, 2, 5, 0))));
+    }
 }
