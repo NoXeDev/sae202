@@ -93,5 +93,7 @@ public class VBoxSolutionTable extends VBox{
         solutionTable.getItems().addAll(selection.getFinalSolves(nbSolves));
     }
 
-
+    public int getSize(){
+        return solutionTable.getItems().size();
+    }
 }

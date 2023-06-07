@@ -72,9 +72,9 @@ public class MainController implements EventHandler {
                     System.out.println("NbSelectionné: " + VBoxRoot.getVBoxHeader().getNbSolutions());
                     try {
                         if (Integer.parseInt(VBoxRoot.getVBoxHeader().getNbSolutions()) > 0) {
-                            VBoxRoot.getVBoxHeader().getHeadMessage().setText(Constants.HEADER_MESSAGE[1]);
-                            VBoxRoot.getVBoxHeader().getHeadMessage().setId("Confirm");
                             VBoxRoot.getVBoxSolutionTable().update(currentSelection, Integer.parseInt(VBoxRoot.getVBoxHeader().getNbSolutions()));
+                            VBoxRoot.getVBoxHeader().getHeadMessage().setText(VBoxRoot.getVBoxSolutionTable().getSize() + Constants.HEADER_MESSAGE[1]);
+                            VBoxRoot.getVBoxHeader().getHeadMessage().setId("Confirm");
                         } else {
                             VBoxRoot.getVBoxHeader().getHeadMessage().setText(Constants.HEADER_MESSAGE[0]);
                             VBoxRoot.getVBoxHeader().getHeadMessage().setId("Error");
