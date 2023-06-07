@@ -18,7 +18,7 @@ public class VBoxRoot extends VBox {
         super(40);
         menu = new VBoxMenu();
         header = new VBoxHeader();
-        solutionTable = new VBoxSolutionTable(new HashMap<>()); //A COMPLETER APRES IMPLEMENTATION MULTIPLE SOLUTION
+        solutionTable = new VBoxSolutionTable();
         this.getChildren().addAll(menu, header, solutionTable);
     }
 

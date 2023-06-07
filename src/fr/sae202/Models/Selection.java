@@ -3,6 +3,7 @@ package fr.sae202.Models;
 import fr.sae202.Core.Game;
 import fr.sae202.Core.QuestParser;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +12,6 @@ public class Selection {
     private Integer selType;
     private Integer selCriteria;
     private Integer selOrder;
-    private Map<Integer,Solves> solutionsMap;
     public Selection(Integer scenario, Integer type, Integer criteria, Integer order){
         this.selScenario = scenario;
         this.selType = type;
@@ -19,7 +19,7 @@ public class Selection {
         this.selOrder = order;
     }
 
-    public Solves createSolution() {
+    public ArrayList<Solves> createSolution(int nbSolutions) {
         Game mainGame = new Game();
         QuestParser parser = new QuestParser("res");
         switch (selType) {
@@ -27,25 +27,27 @@ public class Selection {
                 switch (selCriteria) {
                     case 0:
                         try {
-                            return mainGame.solutionEfficaceGloutonne(parser.parseScenario(selScenario));
+                            ArrayList<Solves> tempArray = new ArrayList<>();
+                            tempArray.add(mainGame.solutionEfficaceGloutonne(parser.parseScenario(selScenario)));
+                            return tempArray;
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     case 1:
                         try {
-                            //return mainGame.solutionEfficaceDuree(selScenario);
+                            return mainGame.bestSpeedruns(parser.parseScenario(selScenario), nbSolutions, false, selOrder == 1);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     case 2:
                         try {
-                            //return mainGame.solutionEfficaceNbQuetes(selScenario);
+                            return mainGame.bestNBQuests(parser.parseScenario(selScenario), nbSolutions, false, selOrder == 1);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     case 3:
                         try {
-                            //return mainGame.solutionEfficaceDeplacement(selScenario);
+                            return mainGame.bestDistancePath(parser.parseScenario(selScenario), nbSolutions, false, selOrder == 1);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -54,25 +56,27 @@ public class Selection {
                 switch (selCriteria) {
                     case 0:
                         try {
-                            //return mainGame.solutionExhaustiveGloutonne(selScenario);
+                            ArrayList<Solves> tempArray = new ArrayList<>();
+                            tempArray.add(mainGame.solutionExhaustiveGloutonne(parser.parseScenario(selScenario)));
+                            return tempArray;
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     case 1:
                         try {
-                            //return mainGame.solutionExhaustiveDuree(selScenario);
+                            return mainGame.bestSpeedruns(parser.parseScenario(selScenario), nbSolutions, true, selOrder == 1);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     case 2:
                         try {
-                            //return mainGame.solutionExhaustiveNbQuetes(selScenario);
+                            return mainGame.bestNBQuests(parser.parseScenario(selScenario), nbSolutions, true, selOrder == 1);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     case 3:
                         try {
-                            //return mainGame.solutionExhaustiveDeplacement(selScenario);
+                            return mainGame.bestDistancePath(parser.parseScenario(selScenario), nbSolutions, true, selOrder == 1);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -80,21 +84,7 @@ public class Selection {
         }
         return null;}
 
-    public Map<Integer,Solves> createSolvesMap(){
-        solutionsMap = new HashMap<Integer, Solves>();
-        return solutionsMap;
-        //A MODIFIER UNE FOIS LE SYSTEME DE MUTLI-SOLUTIONS CRÉÉ
-    }
-
-    public Map<Integer,Solves> getFinalSolvesMap(int solvesValue){
-        Map<Integer,Solves> finalSolvesMap = new HashMap<Integer,Solves>();
-        if (solvesValue > solutionsMap.size() || solvesValue == -1){
-            solvesValue = solutionsMap.size();
-        }
-        for (int i = 0; i < solvesValue; i++) {
-            finalSolvesMap.put(i,solutionsMap.get(i));
-        }
-        return finalSolvesMap;
-        //A MODIFIER UNE FOIS LE SYSTEME DE MUTLI-SOLUTIONS CRÉÉ
+    public ArrayList<Solves> getFinalSolves(int nbSolutions){
+        return createSolution(nbSolutions);
     }
 }
