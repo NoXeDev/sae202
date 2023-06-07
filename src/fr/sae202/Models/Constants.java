@@ -1,6 +1,7 @@
 package fr.sae202.Models;
 
 public interface Constants {
+    final String APP_NAME = "SAE202";
     final String[] MENU_BAR = {"Scénarios","Type","Critère","Ordre"};
     final String[] MENU_TYPES = {"Efficace","Exhaustive"};
     final String[] MENU_CRITERIA = {"Glouton","Durée","Nombre de quêtes","Déplacement"};
