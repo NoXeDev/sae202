@@ -106,6 +106,7 @@ public class Game {
     /**
      * Effective solution that return the best path for speedrun scenario
      * @param scenario The scenario id
+     * @param nSolutions The number of solutions to find
      * @return The solves object obtain by the speedrun solution
      */
     public Solves speedrun(Scenario scenario, int nSolutions)
@@ -117,6 +118,8 @@ public class Game {
      * Return the best speedruns for a scenario
      * @param scenario The scenario id
      * @param nSolutions The number of solutions to find
+     * @param isExhaustive If the algorithm is exhaustive or not
+     * @param worthFilter If the algorithm should return worth solutions or not
      * @return The list of the best speedruns
      */
     public ArrayList<Solves> bestSpeedruns(Scenario scenario, int nSolutions, boolean isExhaustive, boolean worthFilter)
@@ -128,6 +131,8 @@ public class Game {
      * Return quests with the shortest number of quests
      * @param scenario The scenario id
      * @param nSolutions The number of solutions to find
+     * @param isExhaustive If the algorithm is exhaustive or not
+     * @param worthFilter If the algorithm should return worth solutions or not
      * @return The list of the best speedruns
      */
     public ArrayList<Solves> bestNBQuests(Scenario scenario, int nSolutions, boolean isExhaustive, boolean worthFilter)
@@ -139,6 +144,8 @@ public class Game {
      * Return quests with the shortest distance traveled
      * @param scenario The scenario id
      * @param nSolutions The number of solutions to find 
+     * @param isExhaustive If the algorithm is exhaustive or not
+     * @param worthFilter If the algorithm should return worth solutions or not
      * @return The list of the best speedruns
      */
     public ArrayList<Solves> bestDistancePath(Scenario scenario, int nSolutions, boolean isExhaustive, boolean worthFilter)

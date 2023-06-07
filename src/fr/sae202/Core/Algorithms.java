@@ -16,6 +16,7 @@ public class Algorithms {
     /**
     * Find the nearest quest available
     * @param availableQuests Available quests
+    * @param playerPos The player position
     * @return The nearest quest
     */
     public static Quest nearestQuest(ArrayList<Quest> availableQuests, Vector2<Integer> playerPos)
@@ -67,6 +68,7 @@ public class Algorithms {
     * Search for all available quests with the actual finished quests
     * @param scenario The scenario to search in
     * @param player The player
+    * @param xpFilter Filter the quests by xp
     * @return All available quests
     */
     public static ArrayList<Quest> fetchAvailableQuests(Scenario scenario, Player player, boolean xpFilter)
@@ -110,6 +112,7 @@ public class Algorithms {
     /**
      * Find all path to finish the scenario
      * @param scenario The scenario to search in
+     * @param isExhaustive If true, find path with all quests
      * @return All valids paths for finish the scenario
      */
     public static ArrayList<ArrayList<Integer>> findAllPaths(Scenario scenario, boolean isExhaustive) {
@@ -149,6 +152,7 @@ public class Algorithms {
      * @param paths All valids paths
      * @param player The player
      * @param nSolutions The number of solutions to find
+     * @param isExhaustive If true, find path with all quests
      */
     private static void dfs(Scenario scenario, Quest u, Quest end, boolean[] visited, ArrayList<Integer> path, ArrayList<ArrayList<Integer>> paths, Player player, int nSolutions, boolean isExhaustive) {
         if((nSolutions != 0) && (paths.size() >= nSolutions))
@@ -202,6 +206,8 @@ public class Algorithms {
      * Do a simulation of a path for find the fastest path
      * @param scenario The scenario to search in
      * @param paths All valids paths
+     * @param nSolutions The number of solutions to find
+     * @param worthFilter If true, return worth solutions
      * @return The fastest path
      */
     public static ArrayList<Solves> fastestPath(Scenario scenario, ArrayList<ArrayList<Integer>> paths, int nSolutions, boolean worthFilter)
@@ -218,6 +224,8 @@ public class Algorithms {
      * Do a simulation of a path for find the shortest path in number of quests
      * @param scenario The scenario to search in
      * @param paths All valids paths
+     * @param nSolutions The number of solutions to find
+     * @param worthFilter If true, return worth solutions
      * @return The shortest path in number of quests
      */
     public static ArrayList<Solves> shortestNBQuestsPath(Scenario scenario, ArrayList<ArrayList<Integer>> paths, int nSolutions, boolean worthFilter)
@@ -233,6 +241,8 @@ public class Algorithms {
      * Do a simulation of a path for find the shortest path in distance
      * @param scenario The scenario to search in
      * @param paths All valids paths
+     * @param nSolutions The number of solutions to find
+     * @param worthFilter If true, return worth solutions
      * @return The shortest path in distance
      */
     public static ArrayList<Solves> shortestDistancePath(Scenario scenario, ArrayList<ArrayList<Integer>> paths, int nSolutions, boolean worthFilter)
@@ -274,6 +284,8 @@ public class Algorithms {
      * Sort a list with insertion sort
      * @param list The list to sort
      * @param f property filter to sort quests
+     * @param nSolutions The number of solutions to find
+     * @param reverse If true, reverse the list (for get worth solutions)
      */
     public static ArrayList<Solves> insertionSort(ArrayList<Solves> list, Function<Solves, Integer> f, int nSolutions, boolean reverse) {
         int n = list.size();

@@ -9,6 +9,14 @@ public class Solves {
     private int solveQuestNumber;
     private int sumDistancesTraveled;
 
+    /**
+     * Constructor of the Solves class.
+     * @param solveList
+     * @param solveDuration
+     * @param solveXp
+     * @param solveQuestNumber
+     * @param sumDistancesTraveled
+     */
     public Solves(ArrayList<Integer> solveList, int solveDuration, int solveXp, int solveQuestNumber, int sumDistancesTraveled) 
     {
         this.solveList = solveList;
