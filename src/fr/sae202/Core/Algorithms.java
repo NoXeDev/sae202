@@ -1,6 +1,7 @@
 package fr.sae202.Core;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 import com.google.common.base.Function;
@@ -275,36 +276,23 @@ public class Algorithms {
      * @param f property filter to sort quests
      */
     public static ArrayList<Solves> insertionSort(ArrayList<Solves> list, Function<Solves, Integer> f, int nSolutions, boolean reverse) {
-        ArrayList<Solves> sortedList = new ArrayList<>();
-        int n = (nSolutions == 0) ? list.size() : nSolutions;
-        if(nSolutions != 0)
-            for(int i = 0; i < n; i++) {
-                sortedList.add(list.get(i));
-            }
-        else
-            sortedList = list;
+        int n = list.size();
+        int resultBound = (nSolutions > list.size()) ? list.size() : nSolutions;
 
         for (int i = 1; i < n; i++) {
-            Solves key = sortedList.get(i);
+            Solves key = list.get(i);
             int j = i - 1;
 
-            if(reverse)
-            {
-                while (j >= 0 && f.apply(sortedList.get(j)) < f.apply(key)) {
-                    sortedList.set(j + 1, sortedList.get(j));
-                    j--;
-                }
-            }
-            else
-            {
-                while (j >= 0 && f.apply(sortedList.get(j)) > f.apply(key)) {
-                    sortedList.set(j + 1, sortedList.get(j));
-                    j--;
-                }
+            while (j >= 0 && f.apply(list.get(j)) > f.apply(key)) {
+                list.set(j + 1, list.get(j));
+                j--;
             }
 
-            sortedList.set(j + 1, key);
+            list.set(j + 1, key);
         }
-        return sortedList;
+        if(reverse)
+            Collections.reverse(list);
+
+        return new ArrayList<Solves>(list.subList(0, resultBound));
     }
 }
