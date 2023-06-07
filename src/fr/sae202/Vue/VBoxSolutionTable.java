@@ -10,7 +10,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.TableView;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * Contains the solution table.

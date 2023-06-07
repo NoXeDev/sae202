@@ -2,7 +2,6 @@ package fr.sae202.Vue;
 
 import fr.sae202.Controller.MainController;
 import fr.sae202.Models.Constants;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;

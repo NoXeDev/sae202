@@ -2,12 +2,7 @@ package fr.sae202.Vue;
 
 
 import fr.sae202.Controller.MainController;
-import fr.sae202.Models.Selection;
-import fr.sae202.Models.Solves;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Label;
-
-import java.util.HashMap;
 
 /**
  * The main entry point for JavaFX application.

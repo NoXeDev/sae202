@@ -4,8 +4,6 @@ import fr.sae202.Core.Game;
 import fr.sae202.Core.QuestParser;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Selection {
     private Integer selScenario;
