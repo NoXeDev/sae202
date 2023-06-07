@@ -4,18 +4,15 @@ import fr.sae202.Controller.MainController;
 import fr.sae202.Models.Constants;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
 
 import javafx.event.ActionEvent;
 
 public class VBoxHeader extends VBox {
     private Label scenario;
-    private ComboBox<String> nbSolutions;
+    private TextField nbSolutions;
 
     public VBoxHeader(){
         super(10);
@@ -29,18 +26,7 @@ public class VBoxHeader extends VBox {
         Label solutions = new Label(Constants.TEXT_HEADER[1]);
         solutions.setId("label");
 
-        /*int [] tabNbSolutions = [Game.getNbSolutions()];
-        for (int i = 0; i < Game.getNbSolutions() ; i++){
-            tabNbSolutions[i] = i;
-        }
-        nbSolutions = peupleComboBox(tabNbSolutions);
-        */
-
-        //A COMPLETER APRES IMPLEMENTATION MULTIPLE SOLUTION
-
-        nbSolutions = peupleComboBox(Constants.TEST); //TEMPORAIRE
-
-
+        nbSolutions = new TextField();
         nbSolutions.setId("ComboBox");
 
         inputSolutions.getChildren().addAll(solutions, nbSolutions);
@@ -58,14 +44,6 @@ public class VBoxHeader extends VBox {
     }
 
     public String getNbSolutions(){
-        return nbSolutions.getValue();
-    }
-
-    private ComboBox<String> peupleComboBox (String [] strings){
-        ComboBox<String> comboBox = new ComboBox<>();
-        for (String string : strings) {
-            comboBox.getItems().add(string);
-        }
-        return comboBox;
+        return nbSolutions.getText();
     }
 }
