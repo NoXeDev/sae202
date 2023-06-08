@@ -27,8 +27,8 @@ Ce projet contient :
 - Un répertoire [/css](css) contenant le fichier css permettant de mettre en forme l'application JavaFX.
 
 - Un répertoire [/docs](docs) contenant :
-    - La [documentation](docs/index.html) générée par la JavaDoc.
-    - Un [rapport](docs/Rapport.pdf) expliquant le fonctionnement de l'application et les choix de conception.
+    - La [documentation](docs/jdoc/index.html) générée par la JavaDoc.
+    - Un [rapport](docs/SAE_RPG-RAPPORT_DE_L'APPLICATION.pdf) expliquant le fonctionnement de l'application et les choix de conception.
     - Les [diagrammes de classes](docs/diagrams) au format .png et .uml (IntelliJ).
     - Les [rapports de tests](docs/tests) unitaires de l'application.
 
