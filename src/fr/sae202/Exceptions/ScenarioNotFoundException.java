@@ -2,6 +2,9 @@ package fr.sae202.Exceptions;
 
 import java.io.IOException;
 
+/**
+ * Exception that can occure when a scenario is not found
+ */
 public class ScenarioNotFoundException extends CoreException {
     private int scenarioNotFound;
     private EException_type type;

@@ -1,8 +1,7 @@
 package fr.sae202.Utils;
 
 /**
- * Utils vector of two <T> value 
- * @param <T> the type of the value
+ * Utils vector of two T value
  */
 public class Vector2<T> {
     private T x;

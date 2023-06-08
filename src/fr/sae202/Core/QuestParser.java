@@ -20,6 +20,9 @@ import fr.sae202.Exceptions.EException_type;
 import fr.sae202.Exceptions.QuestParseException;
 import fr.sae202.Exceptions.ScenarioNotFoundException;
 
+/**
+ * Class managing the parsing of the scenarios
+ */
 public class QuestParser {
     private String scenariosPath;
     private ArrayList<Integer> availableScenarioList;
@@ -107,7 +110,7 @@ public class QuestParser {
 
     /**
      * Parse all scenario in the given path
-     * @return Map<Integer, Scenario> scenarioMap
+     * @return scenarioMap
      * @throws ScenarioNotFoundException If a scenario is not found
      * @throws QuestParseException If a quest is not well formatted
      */

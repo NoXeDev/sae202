@@ -2,6 +2,9 @@ package fr.sae202;
 
 import fr.sae202.Vue.VueApp;
 
+/**
+ * The main entry point for the application.
+ */
 public class App {
     /**
      * Launches the application.

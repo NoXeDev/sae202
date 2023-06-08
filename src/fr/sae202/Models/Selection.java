@@ -5,6 +5,9 @@ import fr.sae202.Core.QuestParser;
 
 import java.util.ArrayList;
 
+/**
+ * Class that wrap Solves and Scenario to create solutions
+ */
 public class Selection {
     private Integer selScenario;
     private Integer selType;

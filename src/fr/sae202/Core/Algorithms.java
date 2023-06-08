@@ -12,6 +12,9 @@ import fr.sae202.Models.Scenario;
 import fr.sae202.Models.Solves;
 import fr.sae202.Utils.Vector2;
 
+/**
+ * Class containing all algorithms used in the game
+ */
 public class Algorithms {
     /**
     * Find the nearest quest available
@@ -286,6 +289,7 @@ public class Algorithms {
      * @param f property filter to sort quests
      * @param nSolutions The number of solutions to find
      * @param reverse If true, reverse the list (for get worth solutions)
+     * @return The sorted list
      */
     public static ArrayList<Solves> insertionSort(ArrayList<Solves> list, Function<Solves, Integer> f, int nSolutions, boolean reverse) {
         int n = list.size();

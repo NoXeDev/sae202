@@ -2,6 +2,9 @@ package fr.sae202.Models;
 
 import java.util.ArrayList;
 
+/**
+ * Class representing a solution
+ */
 public class Solves {
     private ArrayList<Integer> solveList;
     private int solveDuration;

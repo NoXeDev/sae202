@@ -5,6 +5,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Class containing the core IO methods
+ */
 public class CoreIO {
     /**
      * List all files in a directory

@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Class containing the global utils tools
+ */
 public class GlobalUtils {
 
     /**

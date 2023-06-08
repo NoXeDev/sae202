@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
+/**
+ * Class representing the player and all his functionnality
+ */
 public class Player {
     private ArrayList<Quest> pFinishedQuests;
     private int pXp;

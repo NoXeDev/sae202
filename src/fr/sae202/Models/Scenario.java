@@ -2,6 +2,9 @@ package fr.sae202.Models;
 
 import java.util.Map;
 
+/**
+ * Class representing a scenario
+ */
 public class Scenario {
     private int sId;
     private Map<Integer, Quest> questMap;

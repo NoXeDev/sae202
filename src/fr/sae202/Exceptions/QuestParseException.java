@@ -1,5 +1,8 @@
 package fr.sae202.Exceptions;
 
+/**
+ * Exception that can occure during the quest parsing
+ */
 public class QuestParseException extends CoreException {
     private int scenarioId;
     private int questId;

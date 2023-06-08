@@ -3,13 +3,14 @@ package fr.sae202.Core;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-import fr.sae202.Exceptions.QuestParseException;
-import fr.sae202.Exceptions.ScenarioNotFoundException;
 import fr.sae202.Models.Player;
 import fr.sae202.Models.Quest;
 import fr.sae202.Models.Scenario;
 import fr.sae202.Models.Solves;
 
+/**
+ * Class managing the game and the main player instance
+ */
 public class Game {
    private Player player;
    QuestParser parser;
@@ -31,8 +32,6 @@ public class Game {
     * Greedy Effective solution for the level 1 of sae202
     * @param scenario The scenario id
     * @return The solves object obtain by the greedy effective solution
-    * @throws ScenarioNotFoundException
-    * @throws QuestParseException
    */
    public Solves solutionEfficaceGloutonne(Scenario scenario)
    {

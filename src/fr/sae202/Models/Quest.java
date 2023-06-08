@@ -2,6 +2,9 @@ package fr.sae202.Models;
 
 import fr.sae202.Utils.Vector2;
 
+/**
+ * Class representing a quest
+ */
 public class Quest {
     private int qId;
     private Vector2<Integer> qPos;

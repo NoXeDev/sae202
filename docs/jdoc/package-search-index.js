@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"fr.sae202"},{"l":"fr.sae202.Controller"},{"l":"fr.sae202.Core"},{"l":"fr.sae202.Exceptions"},{"l":"fr.sae202.Models"},{"l":"fr.sae202.Utils"},{"l":"fr.sae202.Vue"}];updateSearchResults();
