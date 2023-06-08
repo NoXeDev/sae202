@@ -16,6 +16,12 @@ public class MainController implements EventHandler<ActionEvent> {
     private int SelectedOrder = 0;
     private Selection currentSelection = new Selection(SelectedScenario, SelectedType, SelectedCriteria, SelectedOrder);
 
+    /**
+     * Handle the events, depending on the source.
+     * - If the source is a RadioMenuItem, update the selection.
+     * - If the source is a Button, launch the algorithm with the current selection and the number of solutions.
+     * @param event the event which occurred
+     */
     @Override
     public void handle(ActionEvent event) {
         if (event.getSource() instanceof RadioMenuItem) {

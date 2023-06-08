@@ -32,6 +32,10 @@ public class Quest {
         qTitle = title;
     }
 
+    /**
+     * toString method of the Quest class.
+     * @return a string containing the quest's id, position, precondition, duration, xp and title
+     */
     public String toString()
     {
         return "ID : " + this.qId + "\nPositions : " + qPos.toString() + "\nPréconditions : " + qPrecondition.toString() + "\nDurée : " + qDuration + "\nXP : " + qXp + "\nTitre : " + qTitle + "\n";
@@ -58,27 +62,44 @@ public class Quest {
         && other.qTitle.equals(this.qTitle);
     }
 
-
+    /**
+     * @return the quest's id
+     */
     public int getQuestId() {
         return qId;
     }
-    
+
+    /**
+     * @return the quest's position
+     */
     public Vector2<Integer> getQuestPos() {
         return qPos;
     }
 
+    /**
+     * @return the quest's precondition
+     */
     public Vector2<Vector2<Integer>> getQuestPrecondition() {
         return qPrecondition;
     }
 
+    /**
+     * @return the quest's duration
+     */
     public int getQuestDuration() {
         return qDuration;
     }
 
+    /**
+     * @return the quest's xp reward
+     */
     public int getQuestXp() {
         return qXp;
     }
 
+    /**
+     * @return the quest's title
+     */
     public String getQuestTitle() {
         return qTitle;
     }

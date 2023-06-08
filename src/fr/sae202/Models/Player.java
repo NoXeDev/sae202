@@ -110,10 +110,18 @@ public class Player {
         return pPos;
     }
 
+    /**
+     * get the current player position
+     * @return the current player position
+     */
     public int getPlayerTime() {
         return pTime;
     }
 
+    /**
+     * get the current player xp
+     * @return the current player xp
+     */
     public int getPlayerXp() {
         return pXp;
     }
