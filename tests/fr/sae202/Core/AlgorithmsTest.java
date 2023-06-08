@@ -133,10 +133,10 @@ public class AlgorithmsTest {
         pathsTest.add(new ArrayList<Integer>(Arrays.asList(1, 2, 4, 3, 0)));
 
         ArrayList<Solves> results = Algorithms.shortestNBQuestsPath(scenario_0, pathsTest, 0, false);
-        ArrayList<Solves> worthResults = Algorithms.shortestDistancePath(scenario_0, pathsTest, 0, true);
+        ArrayList<Solves> worthResults = Algorithms.shortestNBQuestsPath(scenario_0, pathsTest, 0, true);
 
         ArrayList<Integer> awaitedResult = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 0));
-        ArrayList<Integer> awaitedWorthResult = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 0));
+        ArrayList<Integer> awaitedWorthResult = new ArrayList<Integer>(Arrays.asList(1, 2, 4, 3, 0));
 
         assertEquals(results.get(0).getSolveList(), awaitedResult);
         assertEquals(worthResults.get(0).getSolveList(), awaitedWorthResult);

@@ -94,7 +94,7 @@ public class GameTest {
     }
 
     @Test
-    @DisplayName("Speedrun solution test")
+    @DisplayName("NBQuests solution test")
     public void bestNBQuestsTest()
     {
         Game game = new Game();
@@ -105,7 +105,7 @@ public class GameTest {
     }
 
     @Test
-    @DisplayName("Speedrun solution test")
+    @DisplayName("Distance solution test")
     public void bestDistancePathTest()
     {
         Game game = new Game();

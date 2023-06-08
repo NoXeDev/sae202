@@ -54,6 +54,67 @@ Pour tester la classe, on va créer une suite de quêtes aléatoires, et on va t
 |--------|--------------------------------------------------------|------------------|
 | C1     | Quêtes disponibles après avoir terminé la quête 1 et 2 | Quêtes 3 et 4    |
 
+#### 3. Test de la méthode findAllPaths()
+
+| Test de la méthode findAllPaths()          | Version: 1.0     |
+|--------------------------------------------|------------------|
+| Document: Dossier de tests                 | Date: 07/06/2023 |
+| Responsable de la rédaction: Ewen GILBERT  |
+
+| Classe | Chemins à trouver | Résultat attendu |
+|--------|-------------------|------------------|
+| C1     | Chemin 1          | 1,2,3,0          |
+| C2     | Chemin 2          | 1,2,3,4,0        |
+| C3     | Chemin 3          | 1,2,4,0          |
+| C4     | Chemin 4          | 1,2,4,3,0        |
+
+#### 4. Test de la méthode findAllPaths() pour une recherche exhaustive
+
+| Test de la méthode findAllPaths() pour une recherche exhaustive | Version: 1.0     |
+|-----------------------------------------------------------------|------------------|
+| Document: Dossier de tests                                      | Date: 07/06/2023 |
+| Responsable de la rédaction: Ewen GILBERT                       |
+
+| Classe | Cas à tester                   | Résultat attendu |
+|--------|--------------------------------|------------------|
+| C1     | Les chemins ont la même taille | VRAI             |
+
+#### 5. Test de la méthode fastestPath()
+
+| Test de la méthode fastestPath()          | Version: 1.0     |
+|-------------------------------------------|------------------|
+| Document: Dossier de tests                | Date: 07/06/2023 |
+| Responsable de la rédaction: Ewen GILBERT |
+
+| Classe | Cas à tester       | Résultat attendu |
+|--------|--------------------|------------------|
+| C1     | Meilleure solution | 1,2,4,0          |
+| C2     | Pire solution      | 1,2,3,4,0        |
+
+#### 6. Test de la méthode shortestNBQuestsPath()
+
+| Test de la méthode fastestPath()          | Version: 1.0     |
+|-------------------------------------------|------------------|
+| Document: Dossier de tests                | Date: 07/06/2023 |
+| Responsable de la rédaction: Ewen GILBERT |
+
+| Classe | Cas à tester       | Résultat attendu |
+|--------|--------------------|------------------|
+| C1     | Meilleure solution | 1,2,4,0          |
+| C2     | Pire solution      | 1,2,4,3,0        |
+
+#### 7. Test de la méthode shortestDistancePath()
+
+| Test de la méthode shortestDistancePath() | Version: 1.0     |
+|-------------------------------------------|------------------|
+| Document: Dossier de tests                | Date: 07/06/2023 |
+| Responsable de la rédaction: Ewen GILBERT |
+
+| Classe | Cas à tester       | Résultat attendu |
+|--------|--------------------|------------------|
+| C1     | Meilleure solution | 1,2,4,0          |
+| C2     | Pire solution      | 1,2,3,4,5        |
+
 ### 3. Résulats de tests
 
 #### 1. Test de la méthode nearestQuest()
@@ -79,3 +140,64 @@ Pour tester la classe, on va créer une suite de quêtes aléatoires, et on va t
 | Classe | Cas à tester                                           | Résultat attendu | Résultat observé | Résultat du test |
 |--------|--------------------------------------------------------|------------------|------------------|------------------|
 | C1     | Quêtes disponibles après avoir terminé la quête 1 et 2 | Quêtes 3 et 4    | Quêtes 3 et 4    | OK               |
+
+#### 3. Test de la méthode findAllPaths()
+
+| Test de la méthode findAllPaths()          | Version: 1.0     |
+|--------------------------------------------|------------------|
+| Document: Dossier de tests                 | Date: 07/06/2023 |
+| Responsable de la rédaction: Ewen GILBERT  |
+
+| Classe | Chemins à trouver | Résultat attendu | Résultat observé | Résultat du test |
+|--------|-------------------|------------------|------------------|------------------|
+| C1     | Chemin 1          | 1,2,3,0          | 1,2,3,0          | OK               |
+| C2     | Chemin 2          | 1,2,3,4,0        | 1,2,3,4,0        | OK               |
+| C3     | Chemin 3          | 1,2,4,0          | 1,2,4,0          | OK               |
+| C4     | Chemin 4          | 1,2,4,3,0        | 1,2,4,3,0        | OK               |
+
+#### 4. Test de la méthode findAllPaths() pour une recherche exhaustive
+
+| Test de la méthode findAllPaths() pour une recherche exhaustive | Version: 1.0     |
+|-----------------------------------------------------------------|------------------|
+| Document: Dossier de tests                                      | Date: 07/06/2023 |
+| Responsable de la rédaction: Ewen GILBERT                       |
+
+| Classe | Cas à tester                   | Résultat attendu | Résultat observé | Résultat du test |
+|--------|--------------------------------|------------------|------------------|------------------|
+| C1     | Les chemins ont la même taille | VRAI             | VRAI             | OK               |
+
+#### 5. Test de la méthode fastestPath()
+
+| Test de la méthode fastestPath()          | Version: 1.0     |
+|-------------------------------------------|------------------|
+| Document: Dossier de tests                | Date: 07/06/2023 |
+| Responsable de la rédaction: Ewen GILBERT |
+
+| Classe | Cas à tester       | Résultat attendu | Résultat observé | Résultat du test |
+|--------|--------------------|------------------|------------------|------------------|
+| C1     | Meilleure solution | 1,2,4,0          | 1,2,4,0          | OK               |
+| C2     | Pire solution      | 1,2,3,4,0        | 1,2,3,4,0        | OK               |
+
+#### 6. Test de la méthode shortestNBQuestsPath()
+
+| Test de la méthode fastestPath()          | Version: 1.0     |
+|-------------------------------------------|------------------|
+| Document: Dossier de tests                | Date: 07/06/2023 |
+| Responsable de la rédaction: Ewen GILBERT |
+
+| Classe | Cas à tester       | Résultat attendu | Résultat observé | Résultat du test |
+|--------|--------------------|------------------|------------------|------------------|
+| C1     | Meilleure solution | 1,2,4,0          | 1,2,4,0          | OK               |
+| C2     | Pire solution      | 1,2,4,3,0        | 1,2,4,3,0        | OK               |
+
+#### 7. Test de la méthode shortestDistancePath()
+
+| Test de la méthode shortestDistancePath() | Version: 1.0     |
+|-------------------------------------------|------------------|
+| Document: Dossier de tests                | Date: 07/06/2023 |
+| Responsable de la rédaction: Ewen GILBERT |
+
+| Classe | Cas à tester       | Résultat attendu |
+|--------|--------------------|------------------|
+| C1     | Meilleure solution | 1,2,4,0          |
+| C2     | Pire solution      | 1,2,3,4,0        |
