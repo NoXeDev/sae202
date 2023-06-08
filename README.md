@@ -20,7 +20,7 @@ Ce projet contient :
     - [/Utils](src/fr/sae202/Utils/) contient les classes utilitaires de l'application comme la classe [Vector2](src/fr/sae202/Utils/Vector2.java) qui permet de gérer des vecteurs 2D.
     - [/Exceptions](src/fr/sae202/Exceptions/) contient les classes d'exceptions de l'application comme la classe [QuestParseException](src/fr/sae202/Exceptions/QuestParseException.java) qui permet de gérer les exceptions liées au [QuestParser](src/fr/sae202/Core/QuestParser.java).
   
-- Un répertoire [/test](test) contenant les classes de tests unitaires de l'application réalisés avec JUnit.
+- Un répertoire [/test](tests) contenant les classes de tests unitaires de l'application réalisés avec JUnit.
 
 - Un répertoire [/res](res) contenant tous les fichiers textes des différents scénarios à analyser.
 
@@ -29,7 +29,7 @@ Ce projet contient :
 - Un répertoire [/docs](docs) contenant :
     - La [documentation](docs/index.html) générée par la JavaDoc.
     - Un [rapport](docs/Rapport.pdf) expliquant le fonctionnement de l'application et les choix de conception.
-    - Un [diagramme de classes](docs/DIAGRAMME-DES-CLASSES.png) au format .png et .uml (IntelliJ).
+    - Les [diagrammes de classes](docs/diagrams) au format .png et .uml (IntelliJ).
     - Les [rapports de tests](docs/tests) unitaires de l'application.
 
 ## Fonctionnalités
@@ -58,6 +58,8 @@ Toutes les solutions sont affichées dans le tableau avec les informations suiva
 - L'expérience accumulée à la fin de la solution
 - La distance parcourue à la fin de la solution
 - Le nombre de quêtes réalisées
+
+Tous les éléments écrits dans l'interface graphique sont disponibles dans l'interface [Constants](src/fr/sae202/Models/Constants) et peuvent être modifiés à tout moment pour tout changement de langue de l'interface par exemple.
 
 Pour plus de précisions sur les classes et les méthodes de l'application, rendez-vous sur la [documentation](docs/index.html) générée par la JavaDoc.
 
